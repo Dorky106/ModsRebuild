@@ -8,7 +8,7 @@ namespace PhentrixGames.NewColonyAPI.Mods
     public static class ModManager
     {
         private static Dictionary<string, Mod> ModList = new Dictionary<string, Mod>();
-        private static List<Assembly> assemblies = new List<Assembly>();
+        private static Dictionary<string, Assembly> assemblies = new Dictionary<string, Assembly>();
         private static FileStream ServerLock = null;
         public static void RegisterMod(string modName, string modFolder, Version version = null, string modUpdateURL = null, string modConfigFolder = null, string configName = "config.json", List<string> deps = null)
         {
@@ -34,7 +34,7 @@ namespace PhentrixGames.NewColonyAPI.Mods
                 {
                     if (desc.name == modName)
                     {
-                        assemblies.Add(desc.LoadedAssembly);
+                        assemblies.Add(modName, desc.LoadedAssembly);
                     }
                 }
             }
@@ -101,6 +101,16 @@ namespace PhentrixGames.NewColonyAPI.Mods
                 ServerLock.Close();
             }
         }
+
+        internal static Assembly GetAssembly(string modname)
+        {
+            if(assemblies.ContainsKey(modname))
+            {
+                return assemblies[modname];
+            }
+            return null;
+        }
+
         internal static void ClearAssemblies()
         {
             assemblies.Clear();

@@ -39,9 +39,31 @@ namespace PhentrixGames.NewColonyAPI.Helpers
             bolditalic
         }
 
-        public static string BuildMessage()
+        public static string BuildMessage(string message, ChatColour colour = ChatColour.white, ChatStyle chatStyle = ChatStyle.normal)
         {
-            return "";
+            string colourPrefix = "<color=" + colour.ToString() + ">";
+            string colourSuffix = "</color>";
+            string stylePrefix, styleSuffix;
+            switch (chatStyle)
+            {
+                case ChatStyle.bold:
+                    stylePrefix = "<b>";
+                    styleSuffix = "</b>";
+                    break;
+                case ChatStyle.bolditalic:
+                    stylePrefix = "<b><i>";
+                    styleSuffix = "</i></b>";
+                    break;
+                case ChatStyle.italic:
+                    stylePrefix = "<i>";
+                    styleSuffix = "</i>";
+                    break;
+                default:
+                    stylePrefix = "";
+                    styleSuffix = "";
+                    break;
+            }
+            return colourPrefix + message + colourSuffix;
         }
     }
 }

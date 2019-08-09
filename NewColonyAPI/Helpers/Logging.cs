@@ -81,9 +81,7 @@ namespace PhentrixGames.NewColonyAPI.Helpers
         internal static void VersionLog(string modname, LogVersionType logVersion, Version latest = null)
         {
             Pipliz.LogMessage t = new Pipliz.LogMessage();
-            t = new Pipliz.LogMessage("Before switch statement!", UnityEngine.LogType.Log);
             string message = null;
-            ServerLog.LogAsyncMessage(t);
             switch (logVersion)
             {
                 case LogVersionType.Newer:
@@ -99,7 +97,6 @@ namespace PhentrixGames.NewColonyAPI.Helpers
                     t = new Pipliz.LogMessage(GetTimestamp() + "[Version Check] " + modname + message, UnityEngine.LogType.Log);
                     break;
             }
-            ServerLog.LogAsyncMessage(new Pipliz.LogMessage("After switch statement!", UnityEngine.LogType.Log));
             LogMessage(modname, t, false, message);
         }
 

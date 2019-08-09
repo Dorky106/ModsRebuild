@@ -32,5 +32,15 @@ namespace PhentrixGames.NewColonyAPI.Helpers
                 }
             }
         }
+
+        /// <summary>
+        /// Returns wether icon exists or not
+        /// </summary>
+        /// <param name="icon">Full path to the icon</param>
+        /// <returns></returns>
+        public static bool ValidateIcon(string icon)
+        {
+            return File.Exists(icon);
+        }
     }
 }
