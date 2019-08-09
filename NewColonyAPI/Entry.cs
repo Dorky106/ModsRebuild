@@ -6,7 +6,6 @@ namespace PhentrixGames.NewColonyAPI
     {
         public const string ModName = "New Colony API";
         public const string Naming = "PhentrixGames.NewColonyAPI.";
-        public static Version APIVersion = new Version(2, 0, 0, 0);
         public static string ModFolder;
         public static string ModGamedataDirectory;
         public static string ModIconDirectory;
@@ -34,7 +33,7 @@ namespace PhentrixGames.NewColonyAPI
         {
             NewColonyAPIEntry.GameSaveFolder = NewColonyAPIEntry.ModFolder.Substring(0, NewColonyAPIEntry.ModFolder.IndexOf("mods")).Replace("\\", "/") + "savegames/";
 
-            Mods.ModManager.RegisterMod(NewColonyAPIEntry.ModName, NewColonyAPIEntry.ModFolder);
+            Mods.ModManager.RegisterMod(NewColonyAPIEntry.ModName, NewColonyAPIEntry.ModFolder, new Version(999,999,999,999), "http://phentrixgames.com/mods/newcolonyapi");
 
             foreach (var item in mods)
             {

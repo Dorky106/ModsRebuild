@@ -12,6 +12,11 @@ namespace PhentrixGames.NewColonyAPI.Mods
         private static FileStream ServerLock = null;
         public static void RegisterMod(string modName, string modFolder, Version version = null, string modUpdateURL = null, string modConfigFolder = null, string configName = "config.json", List<string> deps = null)
         {
+            if(modName == null || modName == "")
+            {
+                return;
+            }
+
             //Check if Mod is already registered
             if(ModList.ContainsKey(modName) == false)
             {
@@ -19,6 +24,7 @@ namespace PhentrixGames.NewColonyAPI.Mods
                 if (version != null && modUpdateURL != null)
                 {
                     //Run Version Check!
+                    VersionCheck.RunVersionCheck(modName, version, modUpdateURL);
                 }
 
                 ModList.Add(modName, new Mod(modName, modFolder, version, modUpdateURL, modConfigFolder, configName, deps));

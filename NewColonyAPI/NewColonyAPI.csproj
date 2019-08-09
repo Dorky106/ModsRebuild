@@ -58,10 +58,12 @@
   <ItemGroup>
     <Compile Include="Callbacks\CBAfterSelectedWorld.cs" />
     <Compile Include="Entry.cs" />
+    <Compile Include="Helpers\Chat.cs" />
     <Compile Include="Helpers\Logging.cs" />
     <Compile Include="Helpers\Utilities.cs" />
     <Compile Include="Mods\Mod.cs" />
     <Compile Include="Mods\ModManager.cs" />
+    <Compile Include="Mods\VersionCheck.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />

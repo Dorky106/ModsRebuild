@@ -18,6 +18,12 @@ namespace PhentrixGames.NewColonyAPI.Helpers
             Issue,
             Error
         }
+        internal enum LogVersionType
+        {
+            Newer,
+            Release,
+            Outofdate
+        }
 
         internal static void CreateLog(string modName)
         {
@@ -72,22 +78,42 @@ namespace PhentrixGames.NewColonyAPI.Helpers
             LogMessage(modname, t, output, message);
         }
 
+        internal static void VersionLog(string modname, LogVersionType logVersion, Version latest = null)
+        {
+            Pipliz.LogMessage t = new Pipliz.LogMessage();
+            t = new Pipliz.LogMessage("Before switch statement!", UnityEngine.LogType.Log);
+            string message = null;
+            ServerLog.LogAsyncMessage(t);
+            switch (logVersion)
+            {
+                case LogVersionType.Newer:
+                    message = ": You are running a newer version than the public release (latest public release: " + latest.ToString() + ")";
+                    t = new Pipliz.LogMessage(GetTimestamp() + "[Version Check] " + modname + message, UnityEngine.LogType.Log);
+                    break;
+                case LogVersionType.Release:
+                    message = ": Is up to date!";
+                    t = new Pipliz.LogMessage(GetTimestamp() + "[Version Check] " + modname + message, UnityEngine.LogType.Log);
+                    break;
+                case LogVersionType.Outofdate:
+                    message = ": Is out of date.  Latest Version: " + latest.ToString();
+                    t = new Pipliz.LogMessage(GetTimestamp() + "[Version Check] " + modname + message, UnityEngine.LogType.Log);
+                    break;
+            }
+            ServerLog.LogAsyncMessage(new Pipliz.LogMessage("After switch statement!", UnityEngine.LogType.Log));
+            LogMessage(modname, t, false, message);
+        }
+
         private static void LogMessage(string modname, Pipliz.LogMessage logMessage, bool output = false, string message = null)
         {
             ServerLog.LogAsyncMessage(logMessage);
             if(output && message != null)
             {
-                ErrorLogging(modname, message);
-            }
-        }
-
-        private static void ErrorLogging(string modname, string message)
-        {
-            if (sw.ContainsKey(modname))
-            {
-                sw[modname].WriteLine(GetTimestamp() + message);
-                sw[modname].WriteLine("");
-                sw[modname].Flush();
+                if (sw.ContainsKey(modname))
+                {
+                    sw[modname].WriteLine(GetTimestamp() + message);
+                    sw[modname].WriteLine("");
+                    sw[modname].Flush();
+                }
             }
         }
 
