@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("ModsRebuild")]
+[assembly: AssemblyTitle("NewColonyAPI")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("ModsRebuild")]
+[assembly: AssemblyProduct("NewColonyAPI")]
 [assembly: AssemblyCopyright("Copyright ©  2019")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("af9a7b9c-54bb-43bc-b9d9-4a939682e895")]
+[assembly: Guid("e52b4f2e-ed84-47fb-9a32-8ad610262956")]
 
 // Version information for an assembly consists of the following four values:
 //

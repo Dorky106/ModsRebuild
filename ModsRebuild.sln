@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29123.88
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NewColonyAPI", "ModsRebuild\NewColonyAPI.csproj", "{AF9A7B9C-54BB-43BC-B9D9-4A939682E895}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShapedBlocks", "ShapedBlocks\ShapedBlocks.csproj", "{75D5DC60-965B-4C90-A050-AA08E06AE55F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowsExpanded", "WindowsExpanded\WindowsExpanded.csproj", "{BE0D68BC-E7AB-4393-9DE4-6EB069FDC9B9}"
@@ -15,16 +13,14 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExampleMod", "ExampleMod\Ex
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rise of the New Colonies", "Rise of the New Colonies\Rise of the New Colonies.csproj", "{A25A28E2-B319-4FBD-8245-94E9821607B8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NewColonyAPI", "NewColonyAPI\NewColonyAPI.csproj", "{E52B4F2E-ED84-47FB-9A32-8AD610262956}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{AF9A7B9C-54BB-43BC-B9D9-4A939682E895}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{AF9A7B9C-54BB-43BC-B9D9-4A939682E895}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{AF9A7B9C-54BB-43BC-B9D9-4A939682E895}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{AF9A7B9C-54BB-43BC-B9D9-4A939682E895}.Release|Any CPU.Build.0 = Release|Any CPU
 		{75D5DC60-965B-4C90-A050-AA08E06AE55F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{75D5DC60-965B-4C90-A050-AA08E06AE55F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{75D5DC60-965B-4C90-A050-AA08E06AE55F}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -45,6 +41,10 @@ Global
 		{A25A28E2-B319-4FBD-8245-94E9821607B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A25A28E2-B319-4FBD-8245-94E9821607B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A25A28E2-B319-4FBD-8245-94E9821607B8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E52B4F2E-ED84-47FB-9A32-8AD610262956}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E52B4F2E-ED84-47FB-9A32-8AD610262956}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E52B4F2E-ED84-47FB-9A32-8AD610262956}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E52B4F2E-ED84-47FB-9A32-8AD610262956}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
