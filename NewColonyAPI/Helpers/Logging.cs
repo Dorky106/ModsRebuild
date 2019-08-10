@@ -50,7 +50,7 @@ namespace PhentrixGames.NewColonyAPI.Helpers
             sw.Clear();
         }
 
-        public static void WriteLog(string modname, string message, LogType logType, bool output = false)
+        public static void WriteLog(string modname, string message, LogType logType, bool output = false, bool ignoreconsole = false)
         {
             Pipliz.LogMessage t = new Pipliz.LogMessage();
 
@@ -75,7 +75,7 @@ namespace PhentrixGames.NewColonyAPI.Helpers
                     }, 5.0);
                     break;
             }
-            LogMessage(modname, t, output, message);
+            LogMessage(modname, t, output, message, ignoreconsole);
         }
 
         internal static void VersionLog(string modname, LogVersionType logVersion, Version latest = null)
@@ -100,9 +100,11 @@ namespace PhentrixGames.NewColonyAPI.Helpers
             LogMessage(modname, t, false, message);
         }
 
-        private static void LogMessage(string modname, Pipliz.LogMessage logMessage, bool output = false, string message = null)
+        private static void LogMessage(string modname, Pipliz.LogMessage logMessage, bool output = false, string message = null, bool ignoreconsole = false)
         {
-            ServerLog.LogAsyncMessage(logMessage);
+            if(ignoreconsole == false)
+                ServerLog.LogAsyncMessage(logMessage);
+
             if(output && message != null)
             {
                 if (sw.ContainsKey(modname))

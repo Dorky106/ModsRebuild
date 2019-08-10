@@ -61,6 +61,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Callbacks\CBAfterSelectedWorld.cs" />
+    <Compile Include="Configuration\ConfigManager.cs" />
     <Compile Include="Content\BasicBlock.cs" />
     <Compile Include="Entry.cs" />
     <Compile Include="Helpers\Chat.cs" />

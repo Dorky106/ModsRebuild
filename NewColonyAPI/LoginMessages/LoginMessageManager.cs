@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Pipliz.JSON;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,7 +16,29 @@ namespace PhentrixGames.NewColonyAPI.LoginMessages
 
         public static void Init()
         {
-            messages.Add("Init Function needs to be finished!");
+            string logincolor = Configuration.ConfigManager.GetConfigStringOrDefault(NewColonyAPIEntry.ModName, "loginmessages.color", "yellow");
+            if(Enum.IsDefined(typeof(Helpers.Chat.ChatColour), logincolor))
+            {
+                if(Enum.TryParse(logincolor, out colour) == false)
+                {
+                    Helpers.Logging.WriteLog(NewColonyAPIEntry.ModName, "Unable to get loginmessages.color!", Helpers.Logging.LogType.Issue, true);
+                }
+            }
+
+            string loginstyle = Configuration.ConfigManager.GetConfigStringOrDefault(NewColonyAPIEntry.ModName, "loginmessages.style", "normal");
+            if (Enum.IsDefined(typeof(Helpers.Chat.ChatStyle), loginstyle))
+            {
+                if (Enum.TryParse(loginstyle, out style) == false)
+                {
+                    Helpers.Logging.WriteLog(NewColonyAPIEntry.ModName, "Unable to get loginmessages.style!", Helpers.Logging.LogType.Issue, true);
+                }
+            }
+
+            JSONNode loginmsgs = Configuration.ConfigManager.GetConfigNode(NewColonyAPIEntry.ModName, "loginmessages.list");
+            foreach (JSONNode msg in loginmsgs.LoopArray())
+            {
+                messages.Add(msg.GetAs<string>());
+            }
         }
 
 
@@ -41,7 +64,7 @@ namespace PhentrixGames.NewColonyAPI.LoginMessages
             }
             foreach (string msg in messages)
             {
-                Helpers.Chat.SendSilent(p, msg, Helpers.Chat.ChatColour.yellow, Helpers.Chat.ChatStyle.bolditalic);
+                Helpers.Chat.SendSilent(p, msg, colour, style);
             }
         }
     }

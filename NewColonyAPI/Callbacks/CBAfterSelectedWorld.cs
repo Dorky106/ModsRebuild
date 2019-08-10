@@ -16,6 +16,7 @@ namespace PhentrixGames.NewColonyAPI.Callbacks
             {
                 Helpers.Logging.CreateLog(id);
             }
+            Configuration.ConfigManager.LoadConfigs();
             LoginMessages.LoginMessageManager.Init();
         }
     }
