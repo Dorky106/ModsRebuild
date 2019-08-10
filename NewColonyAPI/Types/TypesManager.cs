@@ -17,7 +17,7 @@ namespace PhentrixGames.NewColonyAPI.Types
 
 
         [ModLoader.ModCallback(ModLoader.EModCallbackType.AddItemTypes, NewColonyAPIEntry.Naming + "AddItemTypes")]
-        [ModLoader.ModCallbackProvidesFor("pipliz.server.applymoditempatches")]
+        [ModLoader.ModCallbackProvidesFor(NewColonyAPIEntry.Naming + "ClearMeshs")]
         internal static void AutoDiscoverType(Dictionary<string, ItemTypesServer.ItemTypeRaw> dict)
         {
             int typecount = 0;
@@ -59,6 +59,8 @@ namespace PhentrixGames.NewColonyAPI.Types
                     }
                 }
             }
+            Helpers.Logging.WriteLog(NewColonyAPIEntry.ModName, string.Format("Autoloaded {0} blocks/types", typecount), Helpers.Logging.LogType.Loading);
+            Meshes.MeshManager.ClearMeshs();
         }
     }
 }

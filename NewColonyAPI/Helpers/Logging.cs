@@ -57,18 +57,19 @@ namespace PhentrixGames.NewColonyAPI.Helpers
             switch (logType)
             {
                 case LogType.Normal:
-                    t = new Pipliz.LogMessage("Normal", UnityEngine.LogType.Log);
+                    t = new Pipliz.LogMessage(GetTimestamp() + "["+modname+"]:"+ Chat.BuildMessage(message, Chat.ChatColour.white), UnityEngine.LogType.Log);
                     break;
                 case LogType.Info:
-                    t = new Pipliz.LogMessage("Info", UnityEngine.LogType.Log);
+                    t = new Pipliz.LogMessage(GetTimestamp() + "[" + modname + "]:" + Chat.BuildMessage(message, Chat.ChatColour.lime), UnityEngine.LogType.Log);
                     break;
                 case LogType.Issue:
-                    t = new Pipliz.LogMessage("Issue", UnityEngine.LogType.Log);
+                    t = new Pipliz.LogMessage(GetTimestamp() + "[" + modname + "]:" + Chat.BuildMessage(message, Chat.ChatColour.orange), UnityEngine.LogType.Log);
                     break;
                 case LogType.Loading:
-                    t = new Pipliz.LogMessage("Loading", UnityEngine.LogType.Log);
+                    t = new Pipliz.LogMessage(GetTimestamp() + "[" + modname + "]:" + Chat.BuildMessage(message, Chat.ChatColour.blue), UnityEngine.LogType.Log);
                     break;
                 case LogType.Error:
+                    t = new Pipliz.LogMessage(GetTimestamp() + "[" + modname + "]:" + Chat.BuildMessage(message, Chat.ChatColour.red), UnityEngine.LogType.Log);
                     ThreadManager.InvokeOnMainThread(() =>
                     {
                         UnityEngine.Application.Quit();
@@ -85,16 +86,16 @@ namespace PhentrixGames.NewColonyAPI.Helpers
             switch (logVersion)
             {
                 case LogVersionType.Newer:
-                    message = ": You are running a newer version than the public release (latest public release: " + latest.ToString() + ")";
-                    t = new Pipliz.LogMessage(GetTimestamp() + "[Version Check] " + modname + message, UnityEngine.LogType.Log);
+                    message = "You are running a newer version than the public release (latest public release: " + latest.ToString() + ")";
+                    t = new Pipliz.LogMessage(GetTimestamp() + "[" + NewColonyAPIEntry.ModName + "](Version Check): " + Chat.BuildMessage(message, Chat.ChatColour.blue), UnityEngine.LogType.Log);
                     break;
                 case LogVersionType.Release:
                     message = ": Is up to date!";
-                    t = new Pipliz.LogMessage(GetTimestamp() + "[Version Check] " + modname + message, UnityEngine.LogType.Log);
+                    t = new Pipliz.LogMessage(GetTimestamp() + "[" + NewColonyAPIEntry.ModName + "](Version Check): " + Chat.BuildMessage(message, Chat.ChatColour.green), UnityEngine.LogType.Log);
                     break;
                 case LogVersionType.Outofdate:
                     message = ": Is out of date.  Latest Version: " + latest.ToString();
-                    t = new Pipliz.LogMessage(GetTimestamp() + "[Version Check] " + modname + message, UnityEngine.LogType.Log);
+                    t = new Pipliz.LogMessage(GetTimestamp() + "[" + NewColonyAPIEntry.ModName + "](Version Check): " + Chat.BuildMessage(message, Chat.ChatColour.red), UnityEngine.LogType.Log);
                     break;
             }
             LogMessage(modname, t, false, message);
@@ -118,7 +119,7 @@ namespace PhentrixGames.NewColonyAPI.Helpers
 
         private static string GetTimestamp()
         {
-            return "[" + DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss") + "] ";
+            return "[" + DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss") + "]";
         }
 
         private static string FileName(string modname)

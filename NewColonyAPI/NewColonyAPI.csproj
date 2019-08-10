@@ -68,7 +68,9 @@
     <Compile Include="Helpers\Logging.cs" />
     <Compile Include="Helpers\Player.cs" />
     <Compile Include="Helpers\Utilities.cs" />
+    <Compile Include="Localizations\LocalizationManager.cs" />
     <Compile Include="LoginMessages\LoginMessageManager.cs" />
+    <Compile Include="Meshes\MeshManager.cs" />
     <Compile Include="Mods\Mod.cs" />
     <Compile Include="Mods\ModManager.cs" />
     <Compile Include="Mods\VersionCheck.cs" />
@@ -77,10 +79,7 @@
     <Compile Include="Types\TypesCustomData.cs" />
     <Compile Include="Types\TypesManager.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Localization\" />
-    <Folder Include="Meshes\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>copy /Y "$(TargetPath)" "$(SolutionDir)\Builds"</PostBuildEvent>
