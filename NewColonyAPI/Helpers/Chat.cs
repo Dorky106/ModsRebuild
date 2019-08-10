@@ -65,5 +65,31 @@ namespace PhentrixGames.NewColonyAPI.Helpers
             }
             return colourPrefix + message + colourSuffix;
         }
+
+        public static void Send(Players.Player player, string message, ChatColour chatColour = ChatColour.white, ChatStyle chatStyle = ChatStyle.normal)
+        {
+            string messageBuild = BuildMessage(message, chatColour, chatStyle);
+            Chatting.Chat.Send(player, messageBuild);
+        }
+        public static void SendToAll(string message, ChatColour chatColour = ChatColour.white, ChatStyle chatStyle = ChatStyle.normal)
+        {
+            string messageBuild = BuildMessage(message, chatColour, chatStyle);
+            Chatting.Chat.SendToConnected(messageBuild);
+        }
+        public static void SendToAllBut(Players.Player player, string message, ChatColour chatColour = ChatColour.white, ChatStyle chatStyle = ChatStyle.normal)
+        {
+            string messageBuild = BuildMessage(message, chatColour, chatStyle);
+            Chatting.Chat.SendToConnectedBut(player, messageBuild);
+        }
+        public static void SendSilent(Players.Player player, string message, ChatColour chatColour = ChatColour.white, ChatStyle chatStyle = ChatStyle.normal)
+        {
+            string messageBuild = BuildMessage(message, chatColour, chatStyle);
+            Chatting.Chat.Send(player, messageBuild, Chatting.EChatSendOptions.None);
+        }
+        public static void SendToAllSilent(string message, ChatColour chatColour = ChatColour.white, ChatStyle chatStyle = ChatStyle.normal)
+        {
+            string messageBuild = BuildMessage(message, chatColour, chatStyle);
+            Chatting.Chat.SendToConnected(messageBuild, Chatting.EChatSendOptions.None);
+        }
     }
 }

@@ -37,6 +37,10 @@
     <Reference Include="Newtonsoft.Json">
       <HintPath>F:\SteamLibrary\steamapps\common\Colony Survival\colonyserver_Data\Managed\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="Steamworks.NET, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>F:\SteamLibrary\steamapps\common\Colony Survival\colonyserver_Data\Managed\Steamworks.NET.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -61,7 +65,9 @@
     <Compile Include="Entry.cs" />
     <Compile Include="Helpers\Chat.cs" />
     <Compile Include="Helpers\Logging.cs" />
+    <Compile Include="Helpers\Player.cs" />
     <Compile Include="Helpers\Utilities.cs" />
+    <Compile Include="LoginMessages\LoginMessageManager.cs" />
     <Compile Include="Mods\Mod.cs" />
     <Compile Include="Mods\ModManager.cs" />
     <Compile Include="Mods\VersionCheck.cs" />
@@ -70,7 +76,10 @@
     <Compile Include="Types\TypesCustomData.cs" />
     <Compile Include="Types\TypesManager.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Localization\" />
+    <Folder Include="Meshes\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>copy /Y "$(TargetPath)" "$(SolutionDir)\Builds"</PostBuildEvent>
