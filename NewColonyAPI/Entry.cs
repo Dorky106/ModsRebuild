@@ -11,7 +11,6 @@ namespace PhentrixGames.NewColonyAPI
         public static string ModIconDirectory;
         public static string ModMaterialsDirectory;
         public static string ModSettingsDirectory;
-        public static string ModLocalizationDirection;
         public static string ModStructures;
         public static string ModBackupStructures;
 

@@ -76,6 +76,7 @@
     <Compile Include="Commands\ChatCommands\Whisper.cs" />
     <Compile Include="Configuration\ConfigManager.cs" />
     <Compile Include="Content\BasicBlock.cs" />
+    <Compile Include="Content\BasicRecipe.cs" />
     <Compile Include="Content\BlockSides.cs" />
     <Compile Include="Entry.cs" />
     <Compile Include="Helpers\Chat.cs" />
@@ -89,6 +90,9 @@
     <Compile Include="Mods\ModManager.cs" />
     <Compile Include="Mods\VersionCheck.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Recipe\BaseRecipe.cs" />
+    <Compile Include="Recipe\RecipeManager.cs" />
+    <Compile Include="RotatingMessages\RotatingMessageManager.cs" />
     <Compile Include="Textures\BaseTexture.cs" />
     <Compile Include="Textures\TextureManager.cs" />
     <Compile Include="Types\BaseType.cs" />
