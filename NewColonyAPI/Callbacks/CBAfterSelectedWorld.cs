@@ -27,7 +27,6 @@ namespace PhentrixGames.NewColonyAPI.Callbacks
         {
             foreach (Mods.Mod mod in Mods.ModManager.GetMods().Values)
             {
-                Helpers.Logging.WriteLog(mod.ModName, "random crap", Helpers.Logging.LogType.Info);
                 Meshes.MeshManager.RegisterMeshs(mod.ModName, mod.ModFolder);
             }
         }

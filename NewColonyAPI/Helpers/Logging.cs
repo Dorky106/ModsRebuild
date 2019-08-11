@@ -34,7 +34,7 @@ namespace PhentrixGames.NewColonyAPI.Helpers
                 else
                 {
                     Helpers.Utilities.MakeDirectoryIfNeeded(Utilities.MultiCombine(NewColonyAPIEntry.GameSaveFolder, ServerManager.WorldName, "errorlogs"));
-                    sw.Add(modName, new StreamWriter(Utilities.MultiCombine(NewColonyAPIEntry.GameSaveFolder, ServerManager.WorldName, "errorlogs", modName)));
+                    sw.Add(modName, new StreamWriter(Utilities.MultiCombine(NewColonyAPIEntry.GameSaveFolder, ServerManager.WorldName, "errorlogs", modName + ".txt")));
                     WriteLog(modName, "Log Created!", LogType.Loading);
                 }
             }

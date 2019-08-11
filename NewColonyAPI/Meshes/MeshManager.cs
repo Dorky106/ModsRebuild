@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace PhentrixGames.NewColonyAPI.Meshes
 {
+    [ModLoader.ModManager]
     public class MeshManager
     {
         private static Dictionary<string, Dictionary<string, string>> meshList = new Dictionary<string, Dictionary<string, string>>();
@@ -35,7 +36,7 @@ namespace PhentrixGames.NewColonyAPI.Meshes
 
 
         [ModLoader.ModCallback(ModLoader.EModCallbackType.AddItemTypes, NewColonyAPIEntry.Naming + "ClearMeshs")]
-        internal static void ClearMeshs()
+        internal static void ClearMeshs(Dictionary<string, ItemTypesServer.ItemTypeRaw> dict)
         {
             foreach (string id in meshList.Keys)
             {

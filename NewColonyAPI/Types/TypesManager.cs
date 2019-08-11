@@ -3,8 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PhentrixGames.NewColonyAPI.Types
 {
@@ -18,6 +16,7 @@ namespace PhentrixGames.NewColonyAPI.Types
 
         [ModLoader.ModCallback(ModLoader.EModCallbackType.AddItemTypes, NewColonyAPIEntry.Naming + "AddItemTypes")]
         [ModLoader.ModCallbackProvidesFor(NewColonyAPIEntry.Naming + "ClearMeshs")]
+        [ModLoader.ModCallbackProvidesFor("pipliz.server.applymoditempatches")]
         internal static void AutoDiscoverType(Dictionary<string, ItemTypesServer.ItemTypeRaw> dict)
         {
             int typecount = 0;
@@ -60,7 +59,6 @@ namespace PhentrixGames.NewColonyAPI.Types
                 }
             }
             Helpers.Logging.WriteLog(NewColonyAPIEntry.ModName, string.Format("Autoloaded {0} blocks/types", typecount), Helpers.Logging.LogType.Loading);
-            Meshes.MeshManager.ClearMeshs();
         }
     }
 }

@@ -31,6 +31,15 @@ namespace PhentrixGames.NewColonyAPI
         [ModLoader.ModCallbackProvidesFor(NewColonyAPIEntry.Naming + "Dependencies")]
         public static void AfterModsLoaded(System.Collections.Generic.List<ModLoader.ModDescription> mods)
         {
+            //Get all folder locations
+            NewColonyAPIEntry.ModGamedataDirectory = Helpers.Utilities.MultiCombine(NewColonyAPIEntry.ModFolder, "gamedata");
+            NewColonyAPIEntry.ModIconDirectory = Helpers.Utilities.MultiCombine(NewColonyAPIEntry.ModGamedataDirectory, "textures", "icons");
+            NewColonyAPIEntry.ModMaterialsDirectory = Helpers.Utilities.MultiCombine(NewColonyAPIEntry.ModGamedataDirectory, "textures", "blocks");
+            NewColonyAPIEntry.ModStructures = NewColonyAPIEntry.ModFolder.Substring(0, NewColonyAPIEntry.ModFolder.IndexOf("mods")).Replace("\\", "/") + "Structures/";
+            NewColonyAPIEntry.ModBackupStructures = Helpers.Utilities.MultiCombine(NewColonyAPIEntry.ModGamedataDirectory, "BackupStructures");
+            NewColonyAPIEntry.ModSettingsDirectory = Helpers.Utilities.MultiCombine(NewColonyAPIEntry.ModGamedataDirectory, "Settings");
+
+
             NewColonyAPIEntry.GameSaveFolder = NewColonyAPIEntry.ModFolder.Substring(0, NewColonyAPIEntry.ModFolder.IndexOf("mods")).Replace("\\", "/") + "savegames/";
 
             Mods.ModManager.RegisterMod(NewColonyAPIEntry.ModName, NewColonyAPIEntry.ModFolder, new Version(999,999,999,999), "http://phentrixgames.com/mods/newcolonyapi");

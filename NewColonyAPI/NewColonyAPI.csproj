@@ -61,8 +61,22 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Callbacks\CBAfterSelectedWorld.cs" />
+    <Compile Include="Commands\BaseChatCommand.cs" />
+    <Compile Include="Commands\ChatCommandManager.cs" />
+    <Compile Include="Commands\ChatCommands\AdminChat.cs" />
+    <Compile Include="Commands\ChatCommands\CloseServer.cs" />
+    <Compile Include="Commands\ChatCommands\ColonistPopulation.cs" />
+    <Compile Include="Commands\ChatCommands\ColonyCount.cs" />
+    <Compile Include="Commands\ChatCommands\Help.cs" />
+    <Compile Include="Commands\ChatCommands\Messages.cs" />
+    <Compile Include="Commands\ChatCommands\ModChat.cs" />
+    <Compile Include="Commands\ChatCommands\Online.cs" />
+    <Compile Include="Commands\ChatCommands\MasterChatCommand.cs" />
+    <Compile Include="Commands\ChatCommands\ServerPopulation.cs" />
+    <Compile Include="Commands\ChatCommands\Whisper.cs" />
     <Compile Include="Configuration\ConfigManager.cs" />
     <Compile Include="Content\BasicBlock.cs" />
+    <Compile Include="Content\BlockSides.cs" />
     <Compile Include="Entry.cs" />
     <Compile Include="Helpers\Chat.cs" />
     <Compile Include="Helpers\Logging.cs" />
@@ -75,6 +89,8 @@
     <Compile Include="Mods\ModManager.cs" />
     <Compile Include="Mods\VersionCheck.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Textures\BaseTexture.cs" />
+    <Compile Include="Textures\TextureManager.cs" />
     <Compile Include="Types\BaseType.cs" />
     <Compile Include="Types\TypesCustomData.cs" />
     <Compile Include="Types\TypesManager.cs" />
