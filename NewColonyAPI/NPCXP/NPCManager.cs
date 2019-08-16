@@ -527,6 +527,7 @@ namespace PhentrixGames.NewColonyAPI.NPCXP
 
                     foreach (string id in xpData.XPLevels.Keys)
                     {
+                        Helpers.Logging.WriteLog(NewColonyAPIEntry.ModName, id, Helpers.Logging.LogType.Info);
                         if (JobManager.GetJobData(npc.NPCType, out JobData jobData))
                         {
                             List<ValueTuple<NetworkUI.IItem, int>> items = new List<(NetworkUI.IItem, int)>();

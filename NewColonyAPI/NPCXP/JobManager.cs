@@ -4,21 +4,22 @@ using System.IO;
 
 namespace PhentrixGames.NewColonyAPI.NPCXP
 {
+    [ModLoader.ModManager]
     public static class JobManager
     {
         private static Dictionary<string, JobData> jobinfo = new Dictionary<string, JobData>();
 
         [ModLoader.ModCallback(ModLoader.EModCallbackType.AfterModsLoaded, NewColonyAPIEntry.Naming + "JobManager")]
         [ModLoader.ModCallbackProvidesFor(NewColonyAPIEntry.Naming + "Dependencies")]
-        internal static void Initialize()
+        internal static void Initialize(System.Collections.Generic.List<ModLoader.ModDescription> mods)
         {
-            if (File.Exists(NewColonyAPIEntry.ModFolder + "..\\..\\..\\..\\npcTypes.json"))
+            if (File.Exists(NewColonyAPIEntry.GameSaveFolder + "..\\npcTypes.json"))
             {
-                JSON.Deserialize(NewColonyAPIEntry.ModFolder + "..\\..\\..\\..\\npcTypes.json", out JSONNode npcTypesNode, true);
+                JSON.Deserialize(NewColonyAPIEntry.GameSaveFolder + "..\\npcTypes.json", out JSONNode npcTypesNode, true);
 
-                if (File.Exists(NewColonyAPIEntry.ModFolder + "..\\..\\..\\..\\jobblocks.json"))
+                if (File.Exists(NewColonyAPIEntry.GameSaveFolder + "..\\jobblocks.json"))
                 {
-                    JSON.Deserialize(NewColonyAPIEntry.ModFolder + "..\\..\\..\\..\\jobblocks.json", out JSONNode node, true);
+                    JSON.Deserialize(NewColonyAPIEntry.GameSaveFolder + "..\\jobblocks.json", out JSONNode node, true);
                     {
                         foreach (JSONNode current in node.LoopArray())
                         {
