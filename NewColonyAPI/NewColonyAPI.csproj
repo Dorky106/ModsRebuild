@@ -79,6 +79,12 @@
     <Compile Include="Content\BasicRecipe.cs" />
     <Compile Include="Content\BlockSides.cs" />
     <Compile Include="Entry.cs" />
+    <Compile Include="Fluids\EFluids.cs" />
+    <Compile Include="Fluids\FluidInfo.cs" />
+    <Compile Include="Fluids\FluidManager.cs" />
+    <Compile Include="Fluids\GreatWater.cs" />
+    <Compile Include="Fluids\GreatWaterFake.cs" />
+    <Compile Include="Fluids\WaterTexture.cs" />
     <Compile Include="Helpers\Chat.cs" />
     <Compile Include="Helpers\Logging.cs" />
     <Compile Include="Helpers\Player.cs" />
