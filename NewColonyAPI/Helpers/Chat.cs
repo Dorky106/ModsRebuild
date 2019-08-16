@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace PhentrixGames.NewColonyAPI.Helpers
+﻿namespace PhentrixGames.NewColonyAPI.Helpers
 {
     public static class Chat
     {
@@ -31,6 +25,7 @@ namespace PhentrixGames.NewColonyAPI.Helpers
             white,
             yellow
         }
+
         public enum ChatStyle
         {
             normal,
@@ -43,21 +38,25 @@ namespace PhentrixGames.NewColonyAPI.Helpers
         {
             string colourPrefix = "<color=" + colour.ToString() + ">";
             string colourSuffix = "</color>";
-            string stylePrefix, styleSuffix;
+            string stylePrefix = "";
+            string styleSuffix = "";
             switch (chatStyle)
             {
                 case ChatStyle.bold:
                     stylePrefix = "<b>";
                     styleSuffix = "</b>";
                     break;
+
                 case ChatStyle.bolditalic:
                     stylePrefix = "<b><i>";
                     styleSuffix = "</i></b>";
                     break;
+
                 case ChatStyle.italic:
                     stylePrefix = "<i>";
                     styleSuffix = "</i>";
                     break;
+
                 default:
                     stylePrefix = "";
                     styleSuffix = "";
@@ -71,21 +70,25 @@ namespace PhentrixGames.NewColonyAPI.Helpers
             string messageBuild = BuildMessage(message, chatColour, chatStyle);
             Chatting.Chat.Send(player, messageBuild);
         }
+
         public static void SendToAll(string message, ChatColour chatColour = ChatColour.white, ChatStyle chatStyle = ChatStyle.normal)
         {
             string messageBuild = BuildMessage(message, chatColour, chatStyle);
             Chatting.Chat.SendToConnected(messageBuild);
         }
+
         public static void SendToAllBut(Players.Player player, string message, ChatColour chatColour = ChatColour.white, ChatStyle chatStyle = ChatStyle.normal)
         {
             string messageBuild = BuildMessage(message, chatColour, chatStyle);
             Chatting.Chat.SendToConnectedBut(player, messageBuild);
         }
+
         public static void SendSilent(Players.Player player, string message, ChatColour chatColour = ChatColour.white, ChatStyle chatStyle = ChatStyle.normal)
         {
             string messageBuild = BuildMessage(message, chatColour, chatStyle);
             Chatting.Chat.Send(player, messageBuild, Chatting.EChatSendOptions.None);
         }
+
         public static void SendToAllSilent(string message, ChatColour chatColour = ChatColour.white, ChatStyle chatStyle = ChatStyle.normal)
         {
             string messageBuild = BuildMessage(message, chatColour, chatStyle);

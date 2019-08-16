@@ -2,9 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PhentrixGames.NewColonyAPI.Configuration
 {
@@ -22,10 +19,10 @@ namespace PhentrixGames.NewColonyAPI.Configuration
 
         private static void RegisterConfig(string modname, string configLocation, string filename = "config.json")
         {
-            if(configsetings.ContainsKey(modname) == false)
+            if (configsetings.ContainsKey(modname) == false)
             {
                 Helpers.Logging.WriteLog(NewColonyAPIEntry.ModName, string.Format("Loading configuration file for {0}", modname), Helpers.Logging.LogType.Loading);
-                if(File.Exists(GetWorldConfigLocation(modname)) == false)
+                if (File.Exists(GetWorldConfigLocation(modname)) == false)
                 {
                     File.Copy(GetConfigLocation(configLocation, filename), GetWorldConfigLocation(modname));
                 }
@@ -36,7 +33,7 @@ namespace PhentrixGames.NewColonyAPI.Configuration
                     configsetings.Add(modname, confignode);
                     Helpers.Logging.WriteLog(NewColonyAPIEntry.ModName, string.Format("Successfully loading configuration file for {0}", modname), Helpers.Logging.LogType.Loading);
                 }
-                catch(Exception e)
+                catch (Exception e)
                 {
                     Helpers.Logging.WriteLog(modname, "Error loading configuration! " + e.Message + " : " + e.StackTrace, Helpers.Logging.LogType.Error, true);
                 }
@@ -48,22 +45,21 @@ namespace PhentrixGames.NewColonyAPI.Configuration
             if (configsetings.ContainsKey(modname))
                 return configsetings[modname];
 
-
             //SHOULD NEVER HAPPEN!
             return new JSONNode(NodeType.Object);
         }
-        
+
         public static string GetConfigStringOrDefault(string modname, string key, string defaultvalue)
         {
             JSONNode configNode = GetConfigDataNode(modname);
             string[] keys = key.Split('.');
-            if(keys.Length > 0)
+            if (keys.Length > 0)
             {
                 return GetConfigStringFromNode(keys, 0, configNode, modname, defaultvalue, key);
             }
             else
             {
-                if(configNode.TryGetAs<string>(key, out string result))
+                if (configNode.TryGetAs<string>(key, out string result))
                 {
                     return result;
                 }
@@ -72,13 +68,14 @@ namespace PhentrixGames.NewColonyAPI.Configuration
                 return defaultvalue;
             }
         }
+
         private static string GetConfigStringFromNode(string[] keys, int keyIndex, JSONNode node, string modname, string defaultvalue, string key)
         {
             try
             {
                 if (keys.Length > 0 && keyIndex < keys.Length - 1)
                 {
-                    if(node.HasChild(keys[keyIndex]))
+                    if (node.HasChild(keys[keyIndex]))
                     {
                         JSONNode c = new JSONNode(NodeType.Object);
                         c = node.GetAs<JSONNode>(keys[keyIndex]);
@@ -93,7 +90,7 @@ namespace PhentrixGames.NewColonyAPI.Configuration
                 }
                 else
                 {
-                    if(node.TryGetAs<string>(keys[keyIndex], out string value) == true && value != null && value != "")
+                    if (node.TryGetAs<string>(keys[keyIndex], out string value) == true && value != null && value != "")
                     {
                         return value;
                     }
@@ -102,7 +99,7 @@ namespace PhentrixGames.NewColonyAPI.Configuration
                     return defaultvalue;
                 }
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 Helpers.Logging.WriteLog(NewColonyAPIEntry.ModName,
                     "Error loading configuration (" + modname + "): " + key + " - " + keyIndex.ToString() + "\n" + e.Message + "\n\n" + e.StackTrace, Helpers.Logging.LogType.Issue);
@@ -112,7 +109,6 @@ namespace PhentrixGames.NewColonyAPI.Configuration
                 return "";
             }
         }
-
 
         public static bool GetConfigBooleanOrDefault(string modname, string key, bool defaultvalue)
         {
@@ -137,6 +133,7 @@ namespace PhentrixGames.NewColonyAPI.Configuration
                 return result;
             }
         }
+
         private static bool GetConfigBoolFromNode(string[] keys, int keyIndex, JSONNode node, string modname, bool defaultvalue, string key)
         {
             try
@@ -179,7 +176,6 @@ namespace PhentrixGames.NewColonyAPI.Configuration
             }
         }
 
-
         public static int GetConfigIntOrDefault(string modname, string key, int defaultvalue)
         {
             JSONNode configNode = GetConfigDataNode(modname);
@@ -202,6 +198,7 @@ namespace PhentrixGames.NewColonyAPI.Configuration
                 return result;
             }
         }
+
         private static int GetConfigIntFromNode(string[] keys, int keyIndex, JSONNode node, string modname, int defaultvalue, string key)
         {
             try
@@ -244,7 +241,6 @@ namespace PhentrixGames.NewColonyAPI.Configuration
             }
         }
 
-        
         public static float GetConfigFloatOrDefault(string modname, string key, float defaultvalue)
         {
             JSONNode configNode = GetConfigDataNode(modname);
@@ -267,13 +263,14 @@ namespace PhentrixGames.NewColonyAPI.Configuration
                 return result;
             }
         }
+
         private static float GetConfigFloatFromNode(string[] keys, int keyIndex, JSONNode node, string modname, float defaultvalue, string key)
         {
             try
             {
-                if(keys.Length > 0 && keyIndex < keys.Length - 1)
+                if (keys.Length > 0 && keyIndex < keys.Length - 1)
                 {
-                    if(node.HasChild(keys[keyIndex]))
+                    if (node.HasChild(keys[keyIndex]))
                     {
                         JSONNode c = new JSONNode(NodeType.Object);
                         c = node.GetAs<JSONNode>(keys[keyIndex]);
@@ -288,7 +285,7 @@ namespace PhentrixGames.NewColonyAPI.Configuration
                 }
                 else
                 {
-                    if(node.TryGetAs<float>(keys[keyIndex], out float value) == true)
+                    if (node.TryGetAs<float>(keys[keyIndex], out float value) == true)
                     {
                         return value;
                     }
@@ -297,7 +294,7 @@ namespace PhentrixGames.NewColonyAPI.Configuration
                     return defaultvalue;
                 }
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 Helpers.Logging.WriteLog(NewColonyAPIEntry.ModName,
                     "Error loading configuration (" + modname + "): " + key + " - " + keyIndex.ToString() + "\n" + e.Message + "\n\n" + e.StackTrace, Helpers.Logging.LogType.Issue);
@@ -308,12 +305,11 @@ namespace PhentrixGames.NewColonyAPI.Configuration
             }
         }
 
-
         public static JSONNode GetConfigNode(string modname, string key)
         {
             JSONNode configNode = GetConfigDataNode(modname);
             string[] keys = key.Split('.');
-            if(keys.Length > 0)
+            if (keys.Length > 0)
             {
                 return GetConfigNodeFromNode(keys, 0, configNode, modname, key);
             }
@@ -322,13 +318,14 @@ namespace PhentrixGames.NewColonyAPI.Configuration
                 return configNode.GetAs<JSONNode>(key);
             }
         }
+
         private static JSONNode GetConfigNodeFromNode(string[] keys, int keyIndex, JSONNode node, string modname, string key)
         {
             try
             {
-                if(keys.Length > 0 && keyIndex < keys.Length - 1)
+                if (keys.Length > 0 && keyIndex < keys.Length - 1)
                 {
-                    if(node.HasChild(keys[keyIndex]))
+                    if (node.HasChild(keys[keyIndex]))
                     {
                         JSONNode c = new JSONNode(NodeType.Object);
                         c = node.GetAs<JSONNode>(keys[keyIndex]);
@@ -344,7 +341,7 @@ namespace PhentrixGames.NewColonyAPI.Configuration
                     return node.GetAs<JSONNode>(keys[keyIndex]);
                 }
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 Helpers.Logging.WriteLog(NewColonyAPIEntry.ModName,
                     "Error loading configuration (" + modname + "): " + key + " - " + keyIndex.ToString() + "\n" + e.Message + "\n\n" + e.StackTrace, Helpers.Logging.LogType.Issue);

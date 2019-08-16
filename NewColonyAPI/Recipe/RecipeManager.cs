@@ -22,7 +22,7 @@ namespace PhentrixGames.NewColonyAPI.Recipe
                 Assembly assembly = Mods.ModManager.GetAssembly(mod.ModName);
                 var recipelist = assembly.GetTypes()
                     .Where(t => (t.IsClass && t.IsDefined(typeof(NCAPIRecipe), true)));
-                foreach(var t in recipelist)
+                foreach (var t in recipelist)
                 {
                     try
                     {
@@ -32,25 +32,24 @@ namespace PhentrixGames.NewColonyAPI.Recipe
                     }
                     catch (MissingFieldException mfe)
                     {
-                        Helpers.Logging.WriteLog(modname, 
-                            t.Name + " cannot be instantiated.  This probably isn't an error. " + mfe.Message + " |||| " + mfe.StackTrace, 
+                        Helpers.Logging.WriteLog(modname,
+                            t.Name + " cannot be instantiated.  This probably isn't an error. " + mfe.Message + " |||| " + mfe.StackTrace,
                             Helpers.Logging.LogType.Issue);
                     }
                     catch (InvalidCastException ice)
                     {
-                        Helpers.Logging.WriteLog(modname, t.Name + " doesn't properly implement our Type system. This probably isn't an error. " + ice.Message + " |||| " + ice.StackTrace, 
+                        Helpers.Logging.WriteLog(modname, t.Name + " doesn't properly implement our Type system. This probably isn't an error. " + ice.Message + " |||| " + ice.StackTrace,
                             Helpers.Logging.LogType.Issue);
                     }
                     catch (Exception e)
                     {
-                        Helpers.Logging.WriteLog(modname, t.Name + " Recipe Error: " + e.Message + "\n" + e.StackTrace + "\n\n" + e.InnerException.Message + "\n" + e.InnerException.StackTrace, 
-                            Helpers.Logging.LogType.Issue, 
+                        Helpers.Logging.WriteLog(modname, t.Name + " Recipe Error: " + e.Message + "\n" + e.StackTrace + "\n\n" + e.InnerException.Message + "\n" + e.InnerException.StackTrace,
+                            Helpers.Logging.LogType.Issue,
                             true);
                     }
                 }
             }
             Helpers.Logging.WriteLog(NewColonyAPIEntry.ModName, "Recipes Autoloaded: " + count, Helpers.Logging.LogType.Loading);
         }
-
     }
 }

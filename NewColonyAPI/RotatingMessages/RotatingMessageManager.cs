@@ -1,9 +1,6 @@
 ﻿using Pipliz.JSON;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PhentrixGames.NewColonyAPI.RotatingMessages
 {
@@ -23,7 +20,7 @@ namespace PhentrixGames.NewColonyAPI.RotatingMessages
         [ModLoader.ModCallbackDependsOn(NewColonyAPIEntry.Naming + "AfterSelectedWorld")]
         public static void Init()
         {
-            if(Configuration.ConfigManager.GetConfigBooleanOrDefault(NewColonyAPIEntry.ModName, "rotatingmessages.enabled", false) == true)
+            if (Configuration.ConfigManager.GetConfigBooleanOrDefault(NewColonyAPIEntry.ModName, "rotatingmessages.enabled", false) == true)
             {
                 rotatorEnabled = true;
 
@@ -59,18 +56,20 @@ namespace PhentrixGames.NewColonyAPI.RotatingMessages
         [ModLoader.ModCallback(ModLoader.EModCallbackType.OnFixedUpdate, NewColonyAPIEntry.Naming + "OnFixedUpdated.RotatingMessages")]
         public static void DoRun()
         {
-            if(rotatorEnabled)
+            if (rotatorEnabled)
             {
-                if(Pipliz.Time.MillisecondsSinceStart >= nextUpdateTime)
+                if (Pipliz.Time.MillisecondsSinceStart >= nextUpdateTime)
                 {
                     DoRotate();
                 }
             }
         }
+
         private static long NextUpdate()
         {
             return (long)(rotatorSecondsBetween * 1000 + Pipliz.Time.MillisecondsSinceStart);
         }
+
         private static void DoRotate()
         {
             Helpers.Chat.SendToAllSilent(rotatorMessages[messageIndex], rotatorColor, rotatorStyle);

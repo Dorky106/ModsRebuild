@@ -2,9 +2,6 @@
 using Pipliz.JSON;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PhentrixGames.NewColonyAPI.Commands.ChatCommands
 {
@@ -12,7 +9,7 @@ namespace PhentrixGames.NewColonyAPI.Commands.ChatCommands
     {
         public bool TryDoCommand(Players.Player player, string chat, List<string> splits)
         {
-            if(chat.StartsWith("/"))
+            if (chat.StartsWith("/"))
             {
                 return false;
             }
@@ -25,9 +22,9 @@ namespace PhentrixGames.NewColonyAPI.Commands.ChatCommands
 
             foreach (JSONNode perm in chatColors.LoopArray())
             {
-                if(perm.TryGetAs("permissionstring", out string perName))
+                if (perm.TryGetAs("permissionstring", out string perName))
                 {
-                    if(Helpers.Player.ExactPermission(player, perName))
+                    if (Helpers.Player.ExactPermission(player, perName))
                     {
                         playerPerm = perName;
                         perm.TryGetAs("color", out chatColor);
@@ -39,7 +36,7 @@ namespace PhentrixGames.NewColonyAPI.Commands.ChatCommands
             }
             Helpers.Chat.ChatColour chatColourEnum = (Helpers.Chat.ChatColour)Enum.Parse(typeof(Helpers.Chat.ChatColour), chatColor);
             Helpers.Chat.ChatStyle chatStyleEnum = (Helpers.Chat.ChatStyle)Enum.Parse(typeof(Helpers.Chat.ChatStyle), chatStyle);
-            if(chatPrefix == "")
+            if (chatPrefix == "")
             {
                 Helpers.Chat.SendToAll(Helpers.Chat.BuildMessage(string.Format("[{0}] {1}", player.Name, chat), chatColourEnum, chatStyleEnum));
             }

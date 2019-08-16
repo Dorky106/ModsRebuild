@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PhentrixGames.NewColonyAPI.Meshes
 {
@@ -24,7 +20,7 @@ namespace PhentrixGames.NewColonyAPI.Meshes
 
             foreach (string file in files)
             {
-                if(file.EndsWith(".ply") || file.EndsWith(".obj"))
+                if (file.EndsWith(".ply") || file.EndsWith(".obj"))
                 {
                     meshName = Path.GetFileNameWithoutExtension(file);
                     AddMesh(modName, meshName, file);
@@ -33,7 +29,6 @@ namespace PhentrixGames.NewColonyAPI.Meshes
             }
             Helpers.Logging.WriteLog(NewColonyAPIEntry.ModName, string.Format("Meshes Autoloaded: {0} from {1}", count, modName), Helpers.Logging.LogType.Loading);
         }
-
 
         [ModLoader.ModCallback(ModLoader.EModCallbackType.AddItemTypes, NewColonyAPIEntry.Naming + "ClearMeshs")]
         internal static void ClearMeshs(Dictionary<string, ItemTypesServer.ItemTypeRaw> dict)
@@ -47,7 +42,7 @@ namespace PhentrixGames.NewColonyAPI.Meshes
 
         private static void AddMesh(string modName, string meshName, string meshPath)
         {
-            if(meshList.ContainsKey(modName) == false)
+            if (meshList.ContainsKey(modName) == false)
             {
                 meshList.Add(modName, new Dictionary<string, string>());
             }
@@ -57,13 +52,14 @@ namespace PhentrixGames.NewColonyAPI.Meshes
             else
                 Helpers.Logging.WriteLog(modName, string.Format("Mesh {0} already exists inside {1}", meshName, modName), Helpers.Logging.LogType.Issue);
         }
+
         public static bool GetMesh(string modName, string meshName, out string mesh)
         {
             mesh = "";
 
-            if(meshList.ContainsKey(modName))
+            if (meshList.ContainsKey(modName))
             {
-                if(meshList[modName].ContainsKey(meshName))
+                if (meshList[modName].ContainsKey(meshName))
                 {
                     mesh = meshList[modName][meshName].Replace("\\", "/");
                     return true;

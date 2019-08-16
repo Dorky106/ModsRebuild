@@ -1,5 +1,4 @@
-﻿using Pipliz.JSON;
-using System;
+﻿using System;
 using System.Linq;
 using System.Reflection;
 
@@ -10,7 +9,6 @@ namespace PhentrixGames.NewColonyAPI.Textures
     {
         [AttributeUsage(AttributeTargets.Class | AttributeTargets.Struct, AllowMultiple = false)]
         public class NCAPITexture : Attribute { }
-
 
         [ModLoader.ModCallback(ModLoader.EModCallbackType.AfterSelectedWorld, NewColonyAPIEntry.Naming + "LoadTextures")]
         [ModLoader.ModCallbackDependsOn(NewColonyAPIEntry.Naming + "AfterSelectedWorld")]

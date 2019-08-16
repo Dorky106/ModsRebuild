@@ -12,8 +12,6 @@ namespace PhentrixGames.NewColonyAPI.Types
         [AttributeUsage(AttributeTargets.Class, AllowMultiple = false)]
         public class NCAPIType : Attribute { }
 
-
-
         [ModLoader.ModCallback(ModLoader.EModCallbackType.AddItemTypes, NewColonyAPIEntry.Naming + "AddItemTypes")]
         [ModLoader.ModCallbackProvidesFor(NewColonyAPIEntry.Naming + "ClearMeshs")]
         [ModLoader.ModCallbackProvidesFor("pipliz.server.applymoditempatches")]

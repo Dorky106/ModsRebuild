@@ -26,9 +26,12 @@ namespace PhentrixGames.NewColonyAPI.Helpers
             for (int i = 1; i < parts.Length; i++)
             {
                 newPath = MultiCombine(newPath, parts[i]);
-                if (Directory.Exists(newPath) == false)
+                if (Path.GetExtension(newPath) == string.Empty)
                 {
-                    Directory.CreateDirectory(newPath);
+                    if (Directory.Exists(newPath) == false)
+                    {
+                        Directory.CreateDirectory(newPath);
+                    }
                 }
             }
         }

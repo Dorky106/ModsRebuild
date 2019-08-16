@@ -1,9 +1,5 @@
 ﻿using Pipliz.JSON;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PhentrixGames.NewColonyAPI.Textures
 {
@@ -47,7 +43,7 @@ namespace PhentrixGames.NewColonyAPI.Textures
 
         public void Register()
         {
-           JSONNode texture = new JSONNode();
+            JSONNode texture = new JSONNode();
             texture.SetAs("albedo", Albedo);
 
             if (Emissive != null && Emissive != "")
@@ -58,8 +54,6 @@ namespace PhentrixGames.NewColonyAPI.Textures
 
             if (Normal != null && Normal != "")
                 texture.SetAs("normal", Normal);
-
-            Helpers.Logging.WriteLog(NewColonyAPIEntry.ModName, Name + ": " +texture.ToString(), Helpers.Logging.LogType.Loading, true);
 
             ItemTypesServer.SetTextureMapping(Name, new ItemTypesServer.TextureMapping(texture));
         }

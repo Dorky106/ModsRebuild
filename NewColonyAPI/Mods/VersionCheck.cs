@@ -11,7 +11,7 @@ namespace PhentrixGames.NewColonyAPI.Mods
         {
             bool isOk = true;
 
-            if(errors != SslPolicyErrors.None)
+            if (errors != SslPolicyErrors.None)
             {
                 for (int i = 0; i < chain.ChainStatus.Length; i++)
                 {
@@ -23,7 +23,7 @@ namespace PhentrixGames.NewColonyAPI.Mods
                     chain.ChainPolicy.UrlRetrievalTimeout = new TimeSpan(0, 0, 30);
                     chain.ChainPolicy.VerificationFlags = X509VerificationFlags.AllFlags;
                     bool chainIsValid = chain.Build((X509Certificate2)certificate);
-                    if(chainIsValid == false)
+                    if (chainIsValid == false)
                     {
                         isOk = false;
                         break;
@@ -34,7 +34,6 @@ namespace PhentrixGames.NewColonyAPI.Mods
             return isOk;
         }
 
-
         public static void RunVersionCheck(string modName, Version currentVersion, string versionURL)
         {
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls | SecurityProtocolType.Ssl3;
@@ -42,16 +41,16 @@ namespace PhentrixGames.NewColonyAPI.Mods
 
             WebClient client = new WebClient();
             string latestVersion = client.DownloadString(versionURL);
-
-            if(latestVersion.Length > 0)
+            client.Dispose();
+            if (latestVersion.Length > 0)
             {
                 Version latest = new Version(latestVersion);
                 int result = currentVersion.CompareTo(latest);
-                if(result > 0) //newer
+                if (result > 0) //newer
                 {
                     Helpers.Logging.VersionLog(modName, Helpers.Logging.LogVersionType.Newer, latest);
                 }
-                else if(result < 0) //out of date
+                else if (result < 0) //out of date
                 {
                     Helpers.Logging.VersionLog(modName, Helpers.Logging.LogVersionType.Outofdate, latest);
                 }

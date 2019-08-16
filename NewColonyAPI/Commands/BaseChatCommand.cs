@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace PhentrixGames.NewColonyAPI.Commands
 {
@@ -17,27 +13,28 @@ namespace PhentrixGames.NewColonyAPI.Commands
             ChatCommandPrefix = prefix;
             ValidUsage = validuse;
 
-            if(permissions != null)
+            if (permissions != null)
             {
                 List<string> validperms = new List<string>();
                 foreach (string permission in permissions)
                 {
                     if (permission != null && permission != "")
                         validperms.Add(permission);
-
                 }
                 Permissions = validperms.ToArray();
             }
         }
+
         protected abstract bool RunCommand(Players.Player id, string args, List<string> splits);
+
         public bool TryDoCommand(Players.Player player, string chatItem, List<string> splits)
         {
             bool correct = false;
-            if(HasPermissions(player))
+            if (HasPermissions(player))
             {
                 correct = RunCommand(player, chatItem, splits);
             }
-            if(correct == false)
+            if (correct == false)
             {
                 foreach (string usage in ValidUsage)
                 {
@@ -47,6 +44,7 @@ namespace PhentrixGames.NewColonyAPI.Commands
 
             return true;
         }
+
         protected bool TryMatchPlayer(Players.Player caller, string str, out Players.Player player, bool response = false)
         {
             if (Chatting.CommandManager.TryMatchKnownPlayer(caller, str, response, out player))
@@ -54,6 +52,7 @@ namespace PhentrixGames.NewColonyAPI.Commands
 
             return false;
         }
+
         public bool HasPermissions(Players.Player player)
         {
             if (Permissions == null)

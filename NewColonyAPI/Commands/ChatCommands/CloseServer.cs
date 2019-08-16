@@ -1,10 +1,7 @@
 ﻿using Pipliz;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 
 namespace PhentrixGames.NewColonyAPI.Commands.ChatCommands
 {
@@ -18,11 +15,11 @@ namespace PhentrixGames.NewColonyAPI.Commands.ChatCommands
         {
             var m = Regex.Match(args, @"/closeserver (?<first>['].+?[']|[^ ]+)");
 
-            if(m.Success)
+            if (m.Success)
             {
-                if(Int32.TryParse(m.Groups["first"].Value, out int tmp))
+                if (Int32.TryParse(m.Groups["first"].Value, out int tmp))
                 {
-                    if(tmp >= 15 && tmp <= 60)
+                    if (tmp >= 15 && tmp <= 60)
                     {
                         GameServer.InitClose(tmp);
                         return true;
@@ -49,18 +46,17 @@ namespace PhentrixGames.NewColonyAPI.Commands.ChatCommands
             Helpers.Chat.SendToAll(string.Format("Server shutting down in {0} minutes", remaining), Helpers.Chat.ChatColour.magenta, Helpers.Chat.ChatStyle.bolditalic);
         }
 
-
         [ModLoader.ModCallback(ModLoader.EModCallbackType.OnFixedUpdate, NewColonyAPIEntry.Naming + "GameServer.Update")]
         internal static void Update()
         {
-            if(till != 0)
+            if (till != 0)
             {
-                if(Time.SecondsSinceStartInt >= till)
+                if (Time.SecondsSinceStartInt >= till)
                 {
                     UnityEngine.Application.Quit();
                 }
 
-                if(update + 60 <= Time.SecondsSinceStartInt)
+                if (update + 60 <= Time.SecondsSinceStartInt)
                 {
                     update = Time.SecondsSinceStartInt;
                     remaining--;

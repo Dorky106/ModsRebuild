@@ -1,15 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace PhentrixGames.NewColonyAPI.Commands.ChatCommands
 {
     [ChatCommandManager.NCAPICommand]
     public class ServerPopulation : BaseChatCommand
     {
-        public ServerPopulation() : base("/serverpop", null) { }
+        public ServerPopulation() : base("/serverpop", null)
+        {
+        }
 
         protected override bool RunCommand(Players.Player id, string args, List<string> splits)
         {

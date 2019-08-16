@@ -2,18 +2,17 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PhentrixGames.NewColonyAPI.Commands
 {
     [ModLoader.ModManager]
-   public static class ChatCommandManager
+    public static class ChatCommandManager
     {
         [AttributeUsage(AttributeTargets.Class | AttributeTargets.Struct, AllowMultiple = false)]
         public class NCAPICommand : Attribute { }
 
         private static Dictionary<string, BaseChatCommand> ChatCommandList = new Dictionary<string, BaseChatCommand>();
+
         public static Dictionary<string, BaseChatCommand> GetCommandlist()
         {
             return ChatCommandList;
@@ -73,5 +72,5 @@ namespace PhentrixGames.NewColonyAPI.Commands
                 Helpers.Logging.WriteLog(NewColonyAPIEntry.ModName, string.Format("Autoloaded {0} commands", count), Helpers.Logging.LogType.Loading);
             }
         }
-   }
+    }
 }

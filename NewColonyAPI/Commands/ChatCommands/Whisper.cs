@@ -6,12 +6,14 @@ namespace PhentrixGames.NewColonyAPI.Commands.ChatCommands
     [ChatCommandManager.NCAPICommand]
     public class Whisper : BaseChatCommand
     {
-        public Whisper() : base("/w", null, "/w {playername} {message}") { }
+        public Whisper() : base("/w", null, "/w {playername} {message}")
+        {
+        }
 
         protected override bool RunCommand(Players.Player id, string args, List<string> splits)
         {
             var m = Regex.Match(args, @"/w (?<first>['].+?[']|[^ ]+)");
-            if(m.Success)
+            if (m.Success)
             {
                 if (TryMatchPlayer(id, m.Groups["first"].ToString(), out Players.Player target))
                 {

@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace PhentrixGames.NewColonyAPI.Helpers
+﻿namespace PhentrixGames.NewColonyAPI.Helpers
 {
     public static class Player
     {
@@ -12,13 +6,15 @@ namespace PhentrixGames.NewColonyAPI.Helpers
         {
             return PermissionsManager.CheckAndWarnPermission(player, permission);
         }
+
         public static bool ExactPermission(Players.Player player, string permission)
         {
             return PermissionsManager.HasPermissionExact(player, permission);
         }
+
         public static bool IsSinglePlayer(Players.Player player)
         {
-            if(player.ID.steamID.m_SteamID != 0)
+            if (player.ID.steamID.m_SteamID != 0)
             {
                 return false;
             }

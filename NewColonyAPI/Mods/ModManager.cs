@@ -10,15 +10,16 @@ namespace PhentrixGames.NewColonyAPI.Mods
         private static Dictionary<string, Mod> ModList = new Dictionary<string, Mod>();
         private static Dictionary<string, Assembly> assemblies = new Dictionary<string, Assembly>();
         private static FileStream ServerLock = null;
+
         public static void RegisterMod(string modName, string modFolder, Version version = null, string modUpdateURL = null, string modConfigFolder = null, string configName = "config.json", List<string> deps = null)
         {
-            if(modName == null || modName == "")
+            if (modName == null || modName == "")
             {
                 return;
             }
 
             //Check if Mod is already registered
-            if(ModList.ContainsKey(modName) == false)
+            if (ModList.ContainsKey(modName) == false)
             {
                 //Should version checking happen?
                 if (version != null && modUpdateURL != null)
@@ -45,7 +46,7 @@ namespace PhentrixGames.NewColonyAPI.Mods
             bool chk = true;
             if (ServerLock == null)
             {
-                if(ModList.Count != 0)
+                if (ModList.Count != 0)
                 {
                     foreach (Mods.Mod mod in ModList.Values)
                     {
@@ -62,7 +63,7 @@ namespace PhentrixGames.NewColonyAPI.Mods
                             }
                         }
                     }
-                    if(chk == false)
+                    if (chk == false)
                     {
                         Lock();
                     }
@@ -72,7 +73,7 @@ namespace PhentrixGames.NewColonyAPI.Mods
 
         internal static void Lock()
         {
-            if(ServerLock == null)
+            if (ServerLock == null)
             {
                 Helpers.Logging.WriteLog(NewColonyAPIEntry.ModName, "Locking server due to missing Dependency(s)", Helpers.Logging.LogType.Issue);
                 int index = NewColonyAPIEntry.ModFolder.LastIndexOf("\\mods");
@@ -89,11 +90,13 @@ namespace PhentrixGames.NewColonyAPI.Mods
 
             return null;
         }
+
         public static Dictionary<string, Mod> GetMods()
         {
             return ModList;
         }
 
+        [ModLoader.ModCallback(ModLoader.EModCallbackType.OnQuit, NewColonyAPIEntry.Naming + "Unlock")]
         internal static void Unlock()
         {
             if (ServerLock != null)
@@ -104,7 +107,7 @@ namespace PhentrixGames.NewColonyAPI.Mods
 
         internal static Assembly GetAssembly(string modname)
         {
-            if(assemblies.ContainsKey(modname))
+            if (assemblies.ContainsKey(modname))
             {
                 return assemblies[modname];
             }

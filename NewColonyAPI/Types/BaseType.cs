@@ -1,11 +1,7 @@
 ﻿using Pipliz;
 using Pipliz.JSON;
-using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PhentrixGames.NewColonyAPI.Types
 {
@@ -962,6 +958,7 @@ namespace PhentrixGames.NewColonyAPI.Types
         }
 
         #region Recipe Stuff
+
         /*
         // base Add Recipes function
         public virtual List<BaseRecipe> AddRecipes()
@@ -976,7 +973,9 @@ namespace PhentrixGames.NewColonyAPI.Types
             Managers.RecipeManager.TypesThatHaveRecipes.Add(this);
         }
         */
+
         #endregion Recipe Stuff
+
         public bool UpdateAdjacent
         {
             get;

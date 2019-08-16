@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using Chatting;
+﻿using Chatting;
+using System.Collections.Generic;
 
 namespace PhentrixGames.NewColonyAPI.Commands.ChatCommands
 {
@@ -9,7 +9,7 @@ namespace PhentrixGames.NewColonyAPI.Commands.ChatCommands
         {
             ChatCommandManager.GetCommandlist().TryGetValue(chat.Split(' ')[0], out BaseChatCommand command);
 
-            if(command != null)
+            if (command != null)
             {
                 return command.TryDoCommand(player, chat, splits);
             }

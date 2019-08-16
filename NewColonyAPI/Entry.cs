@@ -38,10 +38,9 @@ namespace PhentrixGames.NewColonyAPI
             NewColonyAPIEntry.ModBackupStructures = Helpers.Utilities.MultiCombine(NewColonyAPIEntry.ModGamedataDirectory, "BackupStructures");
             NewColonyAPIEntry.ModSettingsDirectory = Helpers.Utilities.MultiCombine(NewColonyAPIEntry.ModGamedataDirectory, "Settings");
 
-
             NewColonyAPIEntry.GameSaveFolder = NewColonyAPIEntry.ModFolder.Substring(0, NewColonyAPIEntry.ModFolder.IndexOf("mods")).Replace("\\", "/") + "savegames/";
 
-            Mods.ModManager.RegisterMod(NewColonyAPIEntry.ModName, NewColonyAPIEntry.ModFolder, new Version(999,999,999,999), "http://phentrixgames.com/mods/newcolonyapi");
+            Mods.ModManager.RegisterMod(NewColonyAPIEntry.ModName, NewColonyAPIEntry.ModFolder, new Version(999, 999, 999, 999), "http://phentrixgames.com/mods/newcolonyapi");
 
             foreach (var item in mods)
             {
@@ -52,7 +51,6 @@ namespace PhentrixGames.NewColonyAPI
                     break;
                 }
             }
-
         }
 
         [ModLoader.ModCallback(ModLoader.EModCallbackType.AfterModsLoaded, NewColonyAPIEntry.Naming + "Dependencies")]

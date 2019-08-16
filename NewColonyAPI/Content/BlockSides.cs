@@ -17,6 +17,7 @@ namespace PhentrixGames.NewColonyAPI.Content
         {
         }
     }
+
     [TextureManager.NCAPITexture]
     public class ZM : BaseTexture
     {
@@ -24,6 +25,7 @@ namespace PhentrixGames.NewColonyAPI.Content
         {
         }
     }
+
     [TextureManager.NCAPITexture]
     public class ZP : BaseTexture
     {

@@ -1,15 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PhentrixGames.NewColonyAPI.Helpers
 {
     public static class Logging
     {
         private static Dictionary<string, StreamWriter> sw = new Dictionary<string, StreamWriter>();
+
         public enum LogType
         {
             Normal,
@@ -18,6 +16,7 @@ namespace PhentrixGames.NewColonyAPI.Helpers
             Issue,
             Error
         }
+
         internal enum LogVersionType
         {
             Newer,
@@ -27,7 +26,7 @@ namespace PhentrixGames.NewColonyAPI.Helpers
 
         internal static void CreateLog(string modName)
         {
-            if(modName != null && modName != "")
+            if (modName != null && modName != "")
             {
                 if (sw.ContainsKey(modName))
                     WriteLog(NewColonyAPIEntry.ModName, "The mod [" + modName + "] has already created an errorlog!", LogType.Issue);
@@ -40,6 +39,7 @@ namespace PhentrixGames.NewColonyAPI.Helpers
             }
         }
 
+        [ModLoader.ModCallback(ModLoader.EModCallbackType.OnQuit, NewColonyAPIEntry.Naming + "CloseLogs")]
         internal static void CloseLogs()
         {
             foreach (string s in sw.Keys)
@@ -57,17 +57,21 @@ namespace PhentrixGames.NewColonyAPI.Helpers
             switch (logType)
             {
                 case LogType.Normal:
-                    t = new Pipliz.LogMessage(GetTimestamp() + "["+modname+"]:"+ Chat.BuildMessage(message, Chat.ChatColour.white), UnityEngine.LogType.Log);
+                    t = new Pipliz.LogMessage(GetTimestamp() + "[" + modname + "]:" + Chat.BuildMessage(message, Chat.ChatColour.white), UnityEngine.LogType.Log);
                     break;
+
                 case LogType.Info:
                     t = new Pipliz.LogMessage(GetTimestamp() + "[" + modname + "]:" + Chat.BuildMessage(message, Chat.ChatColour.lime), UnityEngine.LogType.Log);
                     break;
+
                 case LogType.Issue:
                     t = new Pipliz.LogMessage(GetTimestamp() + "[" + modname + "]:" + Chat.BuildMessage(message, Chat.ChatColour.orange), UnityEngine.LogType.Log);
                     break;
+
                 case LogType.Loading:
-                    t = new Pipliz.LogMessage(GetTimestamp() + "[" + modname + "]:" + Chat.BuildMessage(message, Chat.ChatColour.blue), UnityEngine.LogType.Log);
+                    t = new Pipliz.LogMessage(GetTimestamp() + "[" + modname + "]:" + Chat.BuildMessage(message, Chat.ChatColour.lightblue), UnityEngine.LogType.Log);
                     break;
+
                 case LogType.Error:
                     t = new Pipliz.LogMessage(GetTimestamp() + "[" + modname + "]:" + Chat.BuildMessage(message, Chat.ChatColour.red), UnityEngine.LogType.Log);
                     ThreadManager.InvokeOnMainThread(() =>
@@ -87,12 +91,14 @@ namespace PhentrixGames.NewColonyAPI.Helpers
             {
                 case LogVersionType.Newer:
                     message = "You are running a newer version than the public release (latest public release: " + latest.ToString() + ")";
-                    t = new Pipliz.LogMessage(GetTimestamp() + "[" + NewColonyAPIEntry.ModName + "](Version Check): " + Chat.BuildMessage(message, Chat.ChatColour.blue), UnityEngine.LogType.Log);
+                    t = new Pipliz.LogMessage(GetTimestamp() + "[" + NewColonyAPIEntry.ModName + "](Version Check): " + Chat.BuildMessage(message, Chat.ChatColour.lightblue), UnityEngine.LogType.Log);
                     break;
+
                 case LogVersionType.Release:
                     message = ": Is up to date!";
                     t = new Pipliz.LogMessage(GetTimestamp() + "[" + NewColonyAPIEntry.ModName + "](Version Check): " + Chat.BuildMessage(message, Chat.ChatColour.green), UnityEngine.LogType.Log);
                     break;
+
                 case LogVersionType.Outofdate:
                     message = ": Is out of date.  Latest Version: " + latest.ToString();
                     t = new Pipliz.LogMessage(GetTimestamp() + "[" + NewColonyAPIEntry.ModName + "](Version Check): " + Chat.BuildMessage(message, Chat.ChatColour.red), UnityEngine.LogType.Log);
@@ -103,10 +109,10 @@ namespace PhentrixGames.NewColonyAPI.Helpers
 
         private static void LogMessage(string modname, Pipliz.LogMessage logMessage, bool output = false, string message = null, bool ignoreconsole = false)
         {
-            if(ignoreconsole == false)
+            if (ignoreconsole == false)
                 ServerLog.LogAsyncMessage(logMessage);
 
-            if(output && message != null)
+            if (output && message != null)
             {
                 if (sw.ContainsKey(modname))
                 {

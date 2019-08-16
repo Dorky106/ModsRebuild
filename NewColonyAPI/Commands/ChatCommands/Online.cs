@@ -6,7 +6,9 @@ namespace PhentrixGames.NewColonyAPI.Commands.ChatCommands
     [NCAPICommand]
     public class Online : BaseChatCommand
     {
-        public Online() : base("/online", null) {}
+        public Online() : base("/online", null)
+        {
+        }
 
         protected override bool RunCommand(Players.Player id, string args, List<string> splits)
         {
