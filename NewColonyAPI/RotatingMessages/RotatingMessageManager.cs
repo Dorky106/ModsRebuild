@@ -17,7 +17,7 @@ namespace PhentrixGames.NewColonyAPI.RotatingMessages
         private static long nextUpdateTime = 0;
 
         [ModLoader.ModCallback(ModLoader.EModCallbackType.AfterSelectedWorld, NewColonyAPIEntry.Naming + "AfterSelectedWorld.RotatingMessages")]
-        [ModLoader.ModCallbackDependsOn(NewColonyAPIEntry.Naming + "AfterSelectedWorld")]
+        [ModLoader.ModCallbackDependsOn(NewColonyAPIEntry.Naming + "LoadConfigs")]
         public static void Init()
         {
             if (Configuration.ConfigManager.GetConfigBooleanOrDefault(NewColonyAPIEntry.ModName, "rotatingmessages.enabled", false) == true)

@@ -11,6 +11,8 @@ namespace PhentrixGames.NewColonyAPI.LoginMessages
         private static Helpers.Chat.ChatColour colour = Helpers.Chat.ChatColour.white;
         private static Helpers.Chat.ChatStyle style = Helpers.Chat.ChatStyle.normal;
 
+        [ModLoader.ModCallback(ModLoader.EModCallbackType.AfterSelectedWorld, NewColonyAPIEntry.Naming + "LoginMessages")]
+        [ModLoader.ModCallbackDependsOn(NewColonyAPIEntry.Naming + "LoadConfigs")]
         public static void Init()
         {
             string logincolor = Configuration.ConfigManager.GetConfigStringOrDefault(NewColonyAPIEntry.ModName, "loginmessages.color", "yellow");

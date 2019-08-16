@@ -40,7 +40,12 @@ namespace PhentrixGames.NewColonyAPI
 
             NewColonyAPIEntry.GameSaveFolder = NewColonyAPIEntry.ModFolder.Substring(0, NewColonyAPIEntry.ModFolder.IndexOf("mods")).Replace("\\", "/") + "savegames/";
 
-            Mods.ModManager.RegisterMod(NewColonyAPIEntry.ModName, NewColonyAPIEntry.ModFolder, new Version(999, 999, 999, 999), "http://phentrixgames.com/mods/newcolonyapi");
+            Mods.ModManager.RegisterMod(
+                NewColonyAPIEntry.ModName,
+                NewColonyAPIEntry.ModFolder,
+                new Version(999, 999, 999, 999),
+                "http://phentrixgames.com/mods/newcolonyapi",
+                NewColonyAPIEntry.ModSettingsDirectory);
 
             foreach (var item in mods)
             {

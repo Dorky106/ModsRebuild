@@ -4,6 +4,7 @@ using System.IO;
 
 namespace PhentrixGames.NewColonyAPI.Helpers
 {
+    [ModLoader.ModManager]
     public static class Logging
     {
         private static Dictionary<string, StreamWriter> sw = new Dictionary<string, StreamWriter>();
@@ -24,17 +25,21 @@ namespace PhentrixGames.NewColonyAPI.Helpers
             Outofdate
         }
 
-        internal static void CreateLog(string modName)
+        [ModLoader.ModCallback(ModLoader.EModCallbackType.AfterSelectedWorld, NewColonyAPIEntry.Naming + "CreateLogs")]
+        internal static void CreateLog()
         {
-            if (modName != null && modName != "")
+            foreach (string id in Mods.ModManager.GetMods().Keys)
             {
-                if (sw.ContainsKey(modName))
-                    WriteLog(NewColonyAPIEntry.ModName, "The mod [" + modName + "] has already created an errorlog!", LogType.Issue);
-                else
+                if (id != null && id != "")
                 {
-                    Helpers.Utilities.MakeDirectoryIfNeeded(Utilities.MultiCombine(NewColonyAPIEntry.GameSaveFolder, ServerManager.WorldName, "errorlogs"));
-                    sw.Add(modName, new StreamWriter(Utilities.MultiCombine(NewColonyAPIEntry.GameSaveFolder, ServerManager.WorldName, "errorlogs", modName + ".txt")));
-                    WriteLog(modName, "Log Created!", LogType.Loading);
+                    if (sw.ContainsKey(id))
+                        WriteLog(NewColonyAPIEntry.ModName, "The mod [" + id + "] has already created an errorlog!", LogType.Issue);
+                    else
+                    {
+                        Helpers.Utilities.MakeDirectoryIfNeeded(Utilities.MultiCombine(NewColonyAPIEntry.GameSaveFolder, ServerManager.WorldName, "errorlogs"));
+                        sw.Add(id, new StreamWriter(Utilities.MultiCombine(NewColonyAPIEntry.GameSaveFolder, ServerManager.WorldName, "errorlogs", id + ".txt")));
+                        WriteLog(id, "Log Created!", LogType.Loading);
+                    }
                 }
             }
         }

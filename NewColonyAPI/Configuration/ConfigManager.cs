@@ -5,15 +5,20 @@ using System.IO;
 
 namespace PhentrixGames.NewColonyAPI.Configuration
 {
+    [ModLoader.ModManager]
     public static class ConfigManager
     {
         public static Dictionary<string, JSONNode> configsetings = new Dictionary<string, JSONNode>();
 
+        [ModLoader.ModCallback(ModLoader.EModCallbackType.AfterSelectedWorld, NewColonyAPIEntry.Naming + "LoadConfigs")]
+        [ModLoader.ModCallbackDependsOn(NewColonyAPIEntry.Naming + "CreateLogs")]
         internal static void LoadConfigs()
         {
             foreach (Mods.Mod mod in Mods.ModManager.GetMods().Values)
             {
-                RegisterConfig(mod.ModName, mod.ConfigLocation, mod.FileName);
+                if (mod.ModName != null && mod.ModName != "")
+                    if (mod.ConfigLocation != null)
+                        RegisterConfig(mod.ModName, mod.ConfigLocation, mod.FileName);
             }
         }
 
@@ -24,6 +29,8 @@ namespace PhentrixGames.NewColonyAPI.Configuration
                 Helpers.Logging.WriteLog(NewColonyAPIEntry.ModName, string.Format("Loading configuration file for {0}", modname), Helpers.Logging.LogType.Loading);
                 if (File.Exists(GetWorldConfigLocation(modname)) == false)
                 {
+                    Helpers.Utilities.MakeDirectoryIfNeeded(Helpers.Utilities.MultiCombine(NewColonyAPIEntry.GameSaveFolder, ServerManager.WorldName, "configs"));
+                    Helpers.Logging.WriteLog(NewColonyAPIEntry.ModName, configLocation + " " + filename, Helpers.Logging.LogType.Info, true);
                     File.Copy(GetConfigLocation(configLocation, filename), GetWorldConfigLocation(modname));
                 }
                 try
@@ -31,12 +38,12 @@ namespace PhentrixGames.NewColonyAPI.Configuration
                     JSONNode confignode = new JSONNode(NodeType.Object);
                     JSON.Deserialize(GetWorldConfigLocation(modname), out confignode, true);
                     configsetings.Add(modname, confignode);
-                    Helpers.Logging.WriteLog(NewColonyAPIEntry.ModName, string.Format("Successfully loading configuration file for {0}", modname), Helpers.Logging.LogType.Loading);
                 }
                 catch (Exception e)
                 {
                     Helpers.Logging.WriteLog(modname, "Error loading configuration! " + e.Message + " : " + e.StackTrace, Helpers.Logging.LogType.Error, true);
                 }
+                Helpers.Logging.WriteLog(NewColonyAPIEntry.ModName, string.Format("Successfully loading configuration file for {0}", modname), Helpers.Logging.LogType.Loading);
             }
         }
 

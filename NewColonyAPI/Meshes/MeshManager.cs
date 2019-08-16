@@ -8,26 +8,32 @@ namespace PhentrixGames.NewColonyAPI.Meshes
     {
         private static Dictionary<string, Dictionary<string, string>> meshList = new Dictionary<string, Dictionary<string, string>>();
 
-        internal static void RegisterMeshs(string modName, string gamedatafolder)
+        [ModLoader.ModCallback(ModLoader.EModCallbackType.AfterSelectedWorld, NewColonyAPIEntry.Naming + "LoadMeshes")]
+        [ModLoader.ModCallbackDependsOn(NewColonyAPIEntry.Naming + "LoadConfigs")]
+        [ModLoader.ModCallbackProvidesFor("pipliz.server.registertexturemappingtextures")]
+        internal static void RegisterMeshs()
         {
-            if (modName == null && modName == "")
-                return;
-
-            string[] files = Directory.GetFiles(gamedatafolder, "*", SearchOption.AllDirectories);
-
-            string meshName = "";
-            int count = 0;
-
-            foreach (string file in files)
+            foreach (Mods.Mod mod in Mods.ModManager.GetMods().Values)
             {
-                if (file.EndsWith(".ply") || file.EndsWith(".obj"))
+                if (mod.ModName == null && mod.ModName == "")
+                    return;
+
+                string[] files = Directory.GetFiles(mod.ModFolder, "*", SearchOption.AllDirectories);
+
+                string meshName = "";
+                int count = 0;
+
+                foreach (string file in files)
                 {
-                    meshName = Path.GetFileNameWithoutExtension(file);
-                    AddMesh(modName, meshName, file);
-                    count++;
+                    if (file.EndsWith(".ply") || file.EndsWith(".obj"))
+                    {
+                        meshName = Path.GetFileNameWithoutExtension(file);
+                        AddMesh(mod.ModName, meshName, file);
+                        count++;
+                    }
                 }
+                Helpers.Logging.WriteLog(NewColonyAPIEntry.ModName, string.Format("Meshes Autoloaded: {0} from {1}", count, mod.ModName), Helpers.Logging.LogType.Loading);
             }
-            Helpers.Logging.WriteLog(NewColonyAPIEntry.ModName, string.Format("Meshes Autoloaded: {0} from {1}", count, modName), Helpers.Logging.LogType.Loading);
         }
 
         [ModLoader.ModCallback(ModLoader.EModCallbackType.AddItemTypes, NewColonyAPIEntry.Naming + "ClearMeshs")]

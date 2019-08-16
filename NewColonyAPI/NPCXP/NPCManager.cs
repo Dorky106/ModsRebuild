@@ -68,19 +68,19 @@ namespace PhentrixGames.NewColonyAPI.NPCXP
                 }
                 if (((float)maxLevel * EfficiencyPerLevel) > MaxEfficiency)
                 {
-                    Helpers.Logging.WriteLog(NewColonyAPIEntry.ModName, "Lowering EfficiencyPerLevel to be under 50%!", Helpers.Logging.LogType.Info);
+                    Helpers.Logging.WriteLog(NewColonyAPIEntry.ModName, "Lowering EfficiencyPerLevel to be under 50%!", Helpers.Logging.LogType.Loading);
                     while (maxLevel * EfficiencyPerLevel >= MaxEfficiency)
                     {
                         EfficiencyPerLevel = (float)Math.Round((EfficiencyPerLevel - 0.01f) * 100f) / 100f;
                     }
-                    Helpers.Logging.WriteLog(NewColonyAPIEntry.ModName, "Finished lowering EfficiencyPerLevel to be under 50%!", Helpers.Logging.LogType.Info);
+                    Helpers.Logging.WriteLog(NewColonyAPIEntry.ModName, "Finished lowering EfficiencyPerLevel to be under 50%!", Helpers.Logging.LogType.Loading);
                 }
 
                 //Helpers.Utilities.WriteLog("New Colony API", String.Format("NPC Config: baseXP: {0}, maxLevel: {1}, xpMultiplier: {2}, efficiencyPerLevel: {3}", baseXP, maxLevel, XPMultiplier, EfficiencyPerLevel), Helpers.Utilities.LogType.Info);
                 if (JSON.Deserialize(Helpers.Utilities.MultiCombine(NewColonyAPIEntry.ModSettingsDirectory, "npcmalenames.json"), out JSONNode malearray, false))
                 {
                     NPCMaleNameList = malearray;
-                    Helpers.Logging.WriteLog(NewColonyAPIEntry.ModName, "Loaded NPC Male Names List " + NPCMaleNameList.ChildCount, Helpers.Logging.LogType.Info);
+                    Helpers.Logging.WriteLog(NewColonyAPIEntry.ModName, "Loaded NPC Male Names List " + NPCMaleNameList.ChildCount, Helpers.Logging.LogType.Loading);
                 }
                 else
                 {
@@ -93,7 +93,7 @@ namespace PhentrixGames.NewColonyAPI.NPCXP
                 if (JSON.Deserialize(Helpers.Utilities.MultiCombine(NewColonyAPIEntry.ModSettingsDirectory, "npcfemalenames.json"), out JSONNode femalearray, false))
                 {
                     NPCFemaleNameList = femalearray;
-                    Helpers.Logging.WriteLog("New Colony API", "Loaded NPC Female Names List " + NPCFemaleNameList.ChildCount, Helpers.Logging.LogType.Info);
+                    Helpers.Logging.WriteLog("New Colony API", "Loaded NPC Female Names List " + NPCFemaleNameList.ChildCount, Helpers.Logging.LogType.Loading);
                 }
                 else
                 {
@@ -106,7 +106,7 @@ namespace PhentrixGames.NewColonyAPI.NPCXP
                 if (JSON.Deserialize(Helpers.Utilities.MultiCombine(NewColonyAPIEntry.ModSettingsDirectory, "npcsurnames.json"), out JSONNode lastarray, false))
                 {
                     NPCLastNameList = lastarray;
-                    Helpers.Logging.WriteLog(NewColonyAPIEntry.ModName, "Loaded NPC Last Names List " + NPCLastNameList.ChildCount, Helpers.Logging.LogType.Info);
+                    Helpers.Logging.WriteLog(NewColonyAPIEntry.ModName, "Loaded NPC Last Names List " + NPCLastNameList.ChildCount, Helpers.Logging.LogType.Loading);
                 }
                 else
                 {
