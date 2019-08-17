@@ -1,4 +1,6 @@
-﻿using System.IO;
+﻿using Pipliz;
+using Pipliz.JSON;
+using System.IO;
 using System.Text;
 
 namespace PhentrixGames.NewColonyAPI.Helpers
@@ -44,6 +46,26 @@ namespace PhentrixGames.NewColonyAPI.Helpers
         public static bool ValidateIcon(string icon)
         {
             return File.Exists(icon);
+        }
+
+        public static JSONNode Vector3IntToNode(Vector3Int vector)
+        {
+            JSONNode ret = new JSONNode(NodeType.Object);
+            ret.SetAs("x", vector.x);
+            ret.SetAs("y", vector.y);
+            ret.SetAs("z", vector.z);
+
+            return ret;
+        }
+
+        public static Vector3Int NodeToVector3Int(JSONNode node)
+        {
+            int x = node["x"].GetAs<int>();
+            int y = node["y"].GetAs<int>();
+            int z = node["z"].GetAs<int>();
+
+            Pipliz.Vector3Int ret = new Pipliz.Vector3Int(x, y, z);
+            return ret;
         }
     }
 }

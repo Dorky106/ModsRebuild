@@ -47,6 +47,11 @@ namespace PhentrixGames.NewColonyAPI.Recipe
             protected set;
         } = false;
 
+        public BaseRecipe(string name)
+        {
+            Name = name;
+        }
+
         public BaseRecipe(string name, string job, bool playerrecipe = false)
         {
             Name = name;
@@ -90,8 +95,10 @@ namespace PhentrixGames.NewColonyAPI.Recipe
             if (PlayerRecipe)
             {
                 node.SetAs("name", Name + ".Player");
-                List<JSONNode> playerData = new List<JSONNode>();
-                playerData.Add(node);
+                List<JSONNode> playerData = new List<JSONNode>
+                {
+                    node
+                };
                 Recipes.RecipeStorage.PlayerRecipePatch playerRecipePatch = new Recipes.RecipeStorage.PlayerRecipePatch(Recipes.RecipeStorage.EPlayerRecipePatchType.AddOrReplace, 12000, playerData);
                 Recipes.RecipeStorage.QueuePlayerRecipes(playerRecipePatch);
             }
@@ -100,8 +107,10 @@ namespace PhentrixGames.NewColonyAPI.Recipe
                 node.SetAs("name", Name + ".NPC");
                 node.SetAs("defaultLimit", Limit);
                 node.SetAs("defaultPriority", Priority);
-                List<JSONNode> npcData = new List<JSONNode>();
-                npcData.Add(node);
+                List<JSONNode> npcData = new List<JSONNode>
+                {
+                    node
+                };
                 Recipes.RecipeStorage.NPCRecipePatch npcRecipePatch = new Recipes.RecipeStorage.NPCRecipePatch(Recipes.RecipeStorage.ENPCRecipePatchType.AddOrReplace, 12000, npcData, Job);
                 Recipes.RecipeStorage.QueueNPCRecipes(npcRecipePatch);
             }

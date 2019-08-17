@@ -15,7 +15,9 @@ namespace PhentrixGames.NewColonyAPI.Types
         [ModLoader.ModCallback(ModLoader.EModCallbackType.AddItemTypes, NewColonyAPIEntry.Naming + "AddItemTypes")]
         [ModLoader.ModCallbackProvidesFor(NewColonyAPIEntry.Naming + "ClearMeshs")]
         [ModLoader.ModCallbackProvidesFor("pipliz.server.applymoditempatches")]
+#pragma warning disable IDE0060 // Remove unused parameter
         internal static void AutoDiscoverType(Dictionary<string, ItemTypesServer.ItemTypeRaw> dict)
+#pragma warning restore IDE0060 // Remove unused parameter
         {
             int typecount = 0;
 
