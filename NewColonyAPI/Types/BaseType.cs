@@ -1,4 +1,5 @@
-﻿using Pipliz;
+﻿using PhentrixGames.NewColonyAPI.Recipe;
+using Pipliz;
 using Pipliz.JSON;
 using System.Collections.Generic;
 using System.IO;
@@ -959,20 +960,18 @@ namespace PhentrixGames.NewColonyAPI.Types
 
         #region Recipe Stuff
 
-        /*
         // base Add Recipes function
         public virtual List<BaseRecipe> AddRecipes()
         {
-            Helpers.Utilities.WriteLog("New Colony API", "Adding Recipe for: " + this.TypeName);
+            Helpers.Logging.WriteLog(NewColonyAPIEntry.ModName, "Trying to add Recipe for: " + this.TypeName, Helpers.Logging.LogType.Issue);
             throw new System.NotImplementedException();
         }
 
         // create a callback to the RecipeManager to have it attempt to generate recipes
         internal void AddRecipeCallback()
         {
-            Managers.RecipeManager.TypesThatHaveRecipes.Add(this);
+            Recipe.RecipeManager.TypesThatHaveRecipes.Add(this);
         }
-        */
 
         #endregion Recipe Stuff
 

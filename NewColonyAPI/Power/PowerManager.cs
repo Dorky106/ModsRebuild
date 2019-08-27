@@ -13,6 +13,9 @@ namespace PhentrixGames.NewColonyAPI.Power
         [AttributeUsage(AttributeTargets.Class, AllowMultiple = false)]
         public class NCAPIPowerType : Attribute { }
 
+        [AttributeUsage(AttributeTargets.Class, AllowMultiple = false)]
+        public class NCAPIPowerRecipe : Attribute { }
+
         #region Config Settings
 
         private static long nextFeedTime = 0;
@@ -72,7 +75,7 @@ namespace PhentrixGames.NewColonyAPI.Power
                             if (PowerManager.GetPowerObject(blockData.TypeNew.Name, out PowerObject machine))
                             {
                                 Machine mac = (Machine)machine as Machine;
-                                MarkObject(EPowerType.Generator, blockData.Position, mac);
+                                MarkObject(EPowerType.Machine, blockData.Position, mac);
                             }
                             break;
 
@@ -80,7 +83,7 @@ namespace PhentrixGames.NewColonyAPI.Power
                             if (PowerManager.GetPowerObject(blockData.TypeNew.Name, out PowerObject battery))
                             {
                                 Battery bat = (Battery)battery as Battery;
-                                MarkObject(EPowerType.Generator, blockData.Position, bat);
+                                MarkObject(EPowerType.Battery, blockData.Position, bat);
                             }
                             break;
                     }
@@ -94,6 +97,7 @@ namespace PhentrixGames.NewColonyAPI.Power
         }
 
         [ModLoader.ModCallback(ModLoader.EModCallbackType.OnAutoSaveWorld, NewColonyAPIEntry.Naming + "PowerSave")]
+        [ModLoader.ModCallback(ModLoader.EModCallbackType.OnQuit, NewColonyAPIEntry.Naming + "PowerSave")]
         internal static void SaveData()
         {
             if (Enabled)
@@ -199,7 +203,7 @@ namespace PhentrixGames.NewColonyAPI.Power
             }
         }
 
-        private static bool GetPowerObject(string id, out PowerObject powerObject)
+        public static bool GetPowerObject(string id, out PowerObject powerObject)
         {
             powerObject = null;
             if (IsPowerBlock(id))
@@ -291,7 +295,7 @@ namespace PhentrixGames.NewColonyAPI.Power
             return false;
         }
 
-        private static bool IsPowerBlock(string id)
+        public static bool IsPowerBlock(string id)
         {
             if (validblockIDs.ContainsKey(id))
             {
@@ -300,7 +304,7 @@ namespace PhentrixGames.NewColonyAPI.Power
             return false;
         }
 
-        private static string PowerType(string id)
+        public static string PowerType(string id)
         {
             if (IsPowerBlock(id))
             {
@@ -321,21 +325,21 @@ namespace PhentrixGames.NewColonyAPI.Power
                 case EPowerType.Battery:
                     if (batteries.ContainsKey(pos) == false)
                     {
-                        batteries.Add(pos, (Battery)powerObject as Battery);
+                        batteries.Add(pos, powerObject as Battery);
                     }
                     break;
 
                 case EPowerType.Generator:
                     if (generators.ContainsKey(pos) == false)
                     {
-                        generators.Add(pos, (Generator)powerObject as Generator);
+                        generators.Add(pos, powerObject as Generator);
                     }
                     break;
 
                 case EPowerType.Machine:
                     if (machines.ContainsKey(pos) == false)
                     {
-                        machines.Add(pos, (Machine)powerObject as Machine);
+                        machines.Add(pos, powerObject as Machine);
                     }
                     break;
             }
@@ -497,7 +501,9 @@ namespace PhentrixGames.NewColonyAPI.Power
                         };
                         for (int i = 0; i < tocheck.Count; i++)
                         {
+#pragma warning disable IDE0018 // Inline variable declaration
                             ushort blockID = 0;
+#pragma warning restore IDE0018 // Inline variable declaration
                             if (World.TryGetTypeAt(tocheck[i] + Vector3Int.back, out blockID))
                             {
                                 if (validblockIDs.ContainsKey(ItemTypes.IndexLookup.GetName(blockID)))
@@ -520,7 +526,7 @@ namespace PhentrixGames.NewColonyAPI.Power
                                 {
                                     if (generators.ContainsKey(tocheck[i] + Vector3Int.forward))
                                     {
-                                        batteries[pos].RecievePower(generators[tocheck[i] + Vector3Int.back].HasPower(batteries[pos].PowerNeeded()));
+                                        batteries[pos].RecievePower(generators[tocheck[i] + Vector3Int.forward].HasPower(batteries[pos].PowerNeeded()));
                                         if (batteries[pos].PowerNeeded() == 0)
                                             break;
                                     }
@@ -536,7 +542,7 @@ namespace PhentrixGames.NewColonyAPI.Power
                                 {
                                     if (generators.ContainsKey(tocheck[i] + Vector3Int.right))
                                     {
-                                        batteries[pos].RecievePower(generators[tocheck[i] + Vector3Int.back].HasPower(batteries[pos].PowerNeeded()));
+                                        batteries[pos].RecievePower(generators[tocheck[i] + Vector3Int.right].HasPower(batteries[pos].PowerNeeded()));
                                         if (batteries[pos].PowerNeeded() == 0)
                                             break;
                                     }
@@ -552,7 +558,7 @@ namespace PhentrixGames.NewColonyAPI.Power
                                 {
                                     if (generators.ContainsKey(tocheck[i] + Vector3Int.left))
                                     {
-                                        batteries[pos].RecievePower(generators[tocheck[i] + Vector3Int.back].HasPower(batteries[pos].PowerNeeded()));
+                                        batteries[pos].RecievePower(generators[tocheck[i] + Vector3Int.left].HasPower(batteries[pos].PowerNeeded()));
                                         if (batteries[pos].PowerNeeded() == 0)
                                             break;
                                     }
@@ -568,7 +574,7 @@ namespace PhentrixGames.NewColonyAPI.Power
                                 {
                                     if (generators.ContainsKey(tocheck[i] + Vector3Int.up))
                                     {
-                                        batteries[pos].RecievePower(generators[tocheck[i] + Vector3Int.back].HasPower(batteries[pos].PowerNeeded()));
+                                        batteries[pos].RecievePower(generators[tocheck[i] + Vector3Int.up].HasPower(batteries[pos].PowerNeeded()));
                                         if (batteries[pos].PowerNeeded() == 0)
                                             break;
                                     }
@@ -584,7 +590,7 @@ namespace PhentrixGames.NewColonyAPI.Power
                                 {
                                     if (generators.ContainsKey(tocheck[i] + Vector3Int.down))
                                     {
-                                        batteries[pos].RecievePower(generators[tocheck[i] + Vector3Int.back].HasPower(batteries[pos].PowerNeeded()));
+                                        batteries[pos].RecievePower(generators[tocheck[i] + Vector3Int.down].HasPower(batteries[pos].PowerNeeded()));
                                         if (batteries[pos].PowerNeeded() == 0)
                                             break;
                                     }
@@ -606,7 +612,9 @@ namespace PhentrixGames.NewColonyAPI.Power
 
                         for (int i = 0; i < tocheck.Count; i++)
                         {
+#pragma warning disable IDE0018 // Inline variable declaration
                             ushort blockID = 0;
+#pragma warning restore IDE0018 // Inline variable declaration
                             if (World.TryGetTypeAt(tocheck[i] + Vector3Int.back, out blockID) && validblockIDs.ContainsKey(ItemTypes.IndexLookup.GetName(blockID)))
                             {
                                 if (batteries.ContainsKey(tocheck[i] + Vector3Int.back))

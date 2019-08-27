@@ -326,7 +326,7 @@ namespace PhentrixGames.NewColonyAPI.NPCXP
                             }
                         }
 
-                        Helpers.Logging.WriteLog(NewColonyAPIEntry.ModName, "Loaded NPCData", Helpers.Logging.LogType.Info);
+                        Helpers.Logging.WriteLog(NewColonyAPIEntry.ModName, "Loaded NPCData", Helpers.Logging.LogType.Loading);
                     }
                     else
                     {

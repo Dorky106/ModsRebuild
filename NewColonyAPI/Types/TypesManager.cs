@@ -32,7 +32,7 @@ namespace PhentrixGames.NewColonyAPI.Types
                 {
                     try
                     {
-                        BaseType @base = ((BaseType)Activator.CreateInstance(type) as BaseType);
+                        BaseType @base = ((BaseType)Activator.CreateInstance(type));
                         JSONNode typenode = @base.Register();
                         if (@base.OverrideReplace)
                         {
@@ -55,6 +55,40 @@ namespace PhentrixGames.NewColonyAPI.Types
                     catch (Exception e)
                     {
                         Helpers.Logging.WriteLog(mod.ModName, type.Name + " Type Error: " + e.Message + "\n" + e.StackTrace + "\n\n" + e.InnerException.Message + "\n" + e.InnerException.StackTrace, Helpers.Logging.LogType.Issue, true);
+                    }
+                }
+
+                if (Power.PowerManager.IsEnabled())
+                {
+                    var powerlist = assembly.GetTypes()
+                        .Where(t => (t.IsClass && t.IsDefined(typeof(Power.PowerManager.NCAPIPowerType), true)));
+                    foreach (var power in powerlist)
+                    {
+                        try
+                        {
+                            BaseType baseType = ((BaseType)Activator.CreateInstance(power));
+                            JSONNode typenode = baseType.Register();
+                            if (baseType.OverrideReplace)
+                            {
+                                ItemTypesServer.QueueItemTypePatch(baseType.TypeName, ItemTypesServer.EItemTypePatchType.OverrideTypeProperties, typenode, typecount);
+                            }
+                            else
+                            {
+                                ItemTypesServer.QueueItemTypePatch(baseType.TypeName, ItemTypesServer.EItemTypePatchType.AddNewTypes, typenode, typecount);
+                            }
+                        }
+                        catch (MissingFieldException mfe)
+                        {
+                            Helpers.Logging.WriteLog(mod.ModName, power.Name + " cannot be instantiated.  This probably is not an error. " + mfe.Message + " |||| " + mfe.StackTrace, Helpers.Logging.LogType.Issue, true);
+                        }
+                        catch (InvalidCastException ice)
+                        {
+                            Helpers.Logging.WriteLog(mod.ModName, power.Name + " does not properly implement our Power Type System. This probably is not an error. " + ice.Message + " |||| " + ice.StackTrace, Helpers.Logging.LogType.Issue, true);
+                        }
+                        catch (Exception e)
+                        {
+                            Helpers.Logging.WriteLog(mod.ModName, power.Name + "Power Type Error: " + e.Message + "\n" + e.StackTrace + "\n\n" + e.InnerException.Message + "\n" + e.InnerException.StackTrace, Helpers.Logging.LogType.Issue, true);
+                        }
                     }
                 }
             }

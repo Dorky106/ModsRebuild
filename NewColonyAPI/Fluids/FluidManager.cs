@@ -404,7 +404,7 @@ namespace PhentrixGames.NewColonyAPI.Fluids
 
             if (boxedData.ClickType == PlayerClickedData.EClickType.Right)
             {
-                if (boxedData.GetVoxelHit() != null)
+                if (boxedData.HitType == PlayerClickedData.EHitType.Block)
                 {
                     if (boxedData.GetVoxelHit().TypeHit != BlockTypes.BuiltinBlocks.Types.air.ItemIndex || boxedData.GetVoxelHit().TypeHit != BlockTypes.BuiltinBlocks.Types.water.ItemIndex)
                     {

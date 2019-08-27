@@ -1,4 +1,5 @@
-﻿using Pipliz.JSON;
+﻿using PhentrixGames.NewColonyAPI.Mods;
+using Pipliz.JSON;
 using System.Collections.Generic;
 using System.IO;
 
@@ -105,6 +106,17 @@ namespace PhentrixGames.NewColonyAPI.NPCXP
                 {
                     Helpers.Logging.WriteLog(NewColonyAPIEntry.ModName, "Areajobs.json does not exists!", Helpers.Logging.LogType.Issue, true);
                 }
+            }
+        }
+
+        [ModLoader.ModCallback(ModLoader.EModCallbackType.AfterItemTypesDefined, NewColonyAPIEntry.Naming + "NPCTypes")]
+        [ModLoader.ModCallbackProvidesFor("pipliz.server.loadnpctypes")]
+        public static void NPCTypes()
+        {
+            Helpers.Logging.WriteLog(NewColonyAPIEntry.ModName, "Loading NPCTypes", Helpers.Logging.LogType.Loading);
+            foreach (Mod mod in ModManager.GetMods().Values)
+            {
+                NPCTypeManager.RegisterNPCTypes(mod.ModName, mod.ModFolder);
             }
         }
 

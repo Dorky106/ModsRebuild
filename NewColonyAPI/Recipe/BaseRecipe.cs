@@ -1,4 +1,5 @@
 ﻿using Pipliz.JSON;
+using System;
 using System.Collections.Generic;
 
 namespace PhentrixGames.NewColonyAPI.Recipe
@@ -33,13 +34,13 @@ namespace PhentrixGames.NewColonyAPI.Recipe
         {
             get;
             protected set;
-        }
+        } = new List<InventoryItem>();
 
         public List<InventoryItem> Result
         {
             get;
             protected set;
-        }
+        } = new List<InventoryItem>();
 
         public bool PlayerRecipe
         {
@@ -92,27 +93,46 @@ namespace PhentrixGames.NewColonyAPI.Recipe
             }
             node.SetAs("results", noderesults);
 
-            if (PlayerRecipe)
+            try
             {
-                node.SetAs("name", Name + ".Player");
-                List<JSONNode> playerData = new List<JSONNode>
+                if (PlayerRecipe)
+                {
+                    node.SetAs("name", Name + ".Player");
+                    List<JSONNode> playerData = new List<JSONNode>
                 {
                     node
                 };
-                Recipes.RecipeStorage.PlayerRecipePatch playerRecipePatch = new Recipes.RecipeStorage.PlayerRecipePatch(Recipes.RecipeStorage.EPlayerRecipePatchType.AddOrReplace, 12000, playerData);
-                Recipes.RecipeStorage.QueuePlayerRecipes(playerRecipePatch);
+                    Recipes.RecipeStorage.PlayerRecipePatch playerRecipePatch = new Recipes.RecipeStorage.PlayerRecipePatch(Recipes.RecipeStorage.EPlayerRecipePatchType.AddOrReplace, 12000, playerData);
+                    Recipes.RecipeStorage.QueuePlayerRecipes(playerRecipePatch);
+                }
             }
-            if (Job != null && Job != "")
+            catch (Exception e)
             {
-                node.SetAs("name", Name + ".NPC");
-                node.SetAs("defaultLimit", Limit);
-                node.SetAs("defaultPriority", Priority);
-                List<JSONNode> npcData = new List<JSONNode>
+                Helpers.Logging.WriteLog(NewColonyAPIEntry.ModName,
+                    Name + " cannot be registered.  This probably isn't an error. " + e.Message + " |||| " + e.StackTrace,
+                    Helpers.Logging.LogType.Issue);
+            }
+
+            try
+            {
+                if (Job != null && Job != "")
+                {
+                    node.SetAs("name", Name + ".NPC");
+                    node.SetAs("defaultLimit", Limit);
+                    node.SetAs("defaultPriority", Priority);
+                    List<JSONNode> npcData = new List<JSONNode>
                 {
                     node
                 };
-                Recipes.RecipeStorage.NPCRecipePatch npcRecipePatch = new Recipes.RecipeStorage.NPCRecipePatch(Recipes.RecipeStorage.ENPCRecipePatchType.AddOrReplace, 12000, npcData, Job);
-                Recipes.RecipeStorage.QueueNPCRecipes(npcRecipePatch);
+                    Recipes.RecipeStorage.NPCRecipePatch npcRecipePatch = new Recipes.RecipeStorage.NPCRecipePatch(Recipes.RecipeStorage.ENPCRecipePatchType.AddOrReplace, 12000, npcData, Job);
+                    Recipes.RecipeStorage.QueueNPCRecipes(npcRecipePatch);
+                }
+            }
+            catch (Exception e)
+            {
+                Helpers.Logging.WriteLog(NewColonyAPIEntry.ModName,
+                    Name + " cannot be registered to a job.  This probably isn't an error. " + e.Message + " |||| " + e.StackTrace,
+                    Helpers.Logging.LogType.Issue);
             }
         }
     }
