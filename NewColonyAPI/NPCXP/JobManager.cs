@@ -12,7 +12,7 @@ namespace PhentrixGames.NewColonyAPI.NPCXP
 
         [ModLoader.ModCallback(ModLoader.EModCallbackType.AfterModsLoaded, NewColonyAPIEntry.Naming + "JobManager")]
         [ModLoader.ModCallbackProvidesFor(NewColonyAPIEntry.Naming + "Dependencies")]
-        internal static void Initialize(System.Collections.Generic.List<ModLoader.ModDescription> mods)
+        internal static void Initialize(List<ModLoader.ModDescription> mods)
         {
             if (File.Exists(NewColonyAPIEntry.GameSaveFolder + "..\\npcTypes.json"))
             {
@@ -45,6 +45,7 @@ namespace PhentrixGames.NewColonyAPI.NPCXP
                                         {
                                             currentnpctype = currenttwo.GetAs<string>("printName");
                                             jobinfo.Add(currentnpctype, new JobData(jobtype, cooldown));
+                                            NPCTypeManager.AddKeyname(tmptwo);
                                             break;
                                         }
                                     }
@@ -60,6 +61,7 @@ namespace PhentrixGames.NewColonyAPI.NPCXP
                                         {
                                             currentnpctype = currenttwo.GetAs<string>("printName");
                                             jobinfo.Add(currentnpctype, new JobData(jobtype, cooldown));
+                                            NPCTypeManager.AddKeyname(tmptwo);
                                             break;
                                         }
                                     }
@@ -90,6 +92,7 @@ namespace PhentrixGames.NewColonyAPI.NPCXP
                                         {
                                             currentnpctype = currenttwo.GetAs<string>("printName");
                                             jobinfo.Add(currentnpctype, new JobData("areajob", cooldown));
+                                            NPCTypeManager.AddKeyname(tmptwo);
                                             break;
                                         }
                                     }

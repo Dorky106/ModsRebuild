@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 
@@ -45,6 +46,19 @@ namespace PhentrixGames.NewColonyAPI.Textures
                     {
                         Helpers.Logging.WriteLog(modname, t.Name + " Type Error: " + e.Message + " |||| " + e.StackTrace, Helpers.Logging.LogType.Issue, true);
                         Pipliz.Log.WriteWarning(e.Message + e.StackTrace);
+                    }
+                }
+
+                string[] directories = Directory.GetDirectories(mod.ModFolder, "*", SearchOption.AllDirectories);
+                foreach (string dir in directories)
+                {
+                    if (dir.EndsWith("textures"))
+                    {
+                        string[] files = Directory.GetFiles(dir, "*.json", SearchOption.AllDirectories);
+                        foreach (string file in files)
+                        {
+                            ItemTypesServer.QueueTextureMappingFile(file, 1);
+                        }
                     }
                 }
             }

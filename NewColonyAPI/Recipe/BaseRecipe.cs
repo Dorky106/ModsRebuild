@@ -33,13 +33,13 @@ namespace PhentrixGames.NewColonyAPI.Recipe
         public List<InventoryItem> Requirements
         {
             get;
-            protected set;
+            set;
         } = new List<InventoryItem>();
 
         public List<InventoryItem> Result
         {
             get;
-            protected set;
+            set;
         } = new List<InventoryItem>();
 
         public bool PlayerRecipe

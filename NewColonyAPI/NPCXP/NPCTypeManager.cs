@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace PhentrixGames.NewColonyAPI.NPCXP
 {
-    public class NPCTypeManager
+    public static class NPCTypeManager
     {
         private static List<string> keynames = new List<string>();
 
@@ -38,6 +38,19 @@ namespace PhentrixGames.NewColonyAPI.NPCXP
                     break;
                 }
             }
+        }
+
+        internal static void AddKeyname(string keyname)
+        {
+            if (keynames.Contains(keyname) == false)
+            {
+                keynames.Add(keyname);
+            }
+        }
+
+        internal static List<string> GetKeys()
+        {
+            return keynames;
         }
     }
 }

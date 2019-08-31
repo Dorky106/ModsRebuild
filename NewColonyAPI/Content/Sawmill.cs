@@ -1,4 +1,5 @@
-﻿using PhentrixGames.NewColonyAPI.Meshes;
+﻿using System.Collections.Generic;
+using PhentrixGames.NewColonyAPI.Meshes;
 using PhentrixGames.NewColonyAPI.Power;
 using PhentrixGames.NewColonyAPI.Recipe;
 using static PhentrixGames.NewColonyAPI.Power.PowerManager;
@@ -8,7 +9,7 @@ namespace PhentrixGames.NewColonyAPI.Content
     [NCAPIPowerType]
     public class SawmillBlock : Types.BaseType
     {
-        public SawmillBlock() : base("Sawmill", false)
+        public SawmillBlock() : base("Sawmill", true)
         {
             if (MeshManager.GetMesh(NewColonyAPIEntry.ModName, "sawmill", out string mesh))
             {
@@ -19,32 +20,43 @@ namespace PhentrixGames.NewColonyAPI.Content
             this.IsPlaceable = true;
             PowerManager.ValidateBlockID(this.TypeName, new Sawmill());
         }
+
+        public override List<BaseRecipe> AddRecipes()
+        {
+            List<BaseRecipe> recipes = new List<BaseRecipe>()
+            {
+                new BaseRecipe("sawmill.logtaiga.planks", "phentrixgames.sawmill", false)
+                {
+                    Requirements = new List<InventoryItem>()
+                    {
+                        new InventoryItem("logtaiga", 1)
+                    },
+                    Result = new List<InventoryItem>
+                    {
+                        new InventoryItem("planks", 6)
+                    }
+                },
+                new BaseRecipe("sawmill.logtemperate.planks", "phentrixgames.sawmill", false)
+                {
+                    Requirements = new List<InventoryItem>()
+                    {
+                        new InventoryItem("logtemperate", 1)
+                    },
+                    Result = new List<InventoryItem>
+                    {
+                        new InventoryItem("planks", 6)
+                    }
+                }
+            };
+
+            return recipes;
+        }
     }
 
     public class Sawmill : Machine
     {
         public Sawmill() : base("Sawmill", 200, 2)
         {
-        }
-    }
-
-    [RecipeManager.NCAPIRecipe]
-    public class sawmilllogtaigaRecipe : BaseRecipe
-    {
-        public sawmilllogtaigaRecipe() : base("sawmill.logtaiga.planks", "phentrixgames.sawmill", false)
-        {
-            Requirements.Add(new InventoryItem("logtaiga", 1));
-            Result.Add(new InventoryItem("planks", 6));
-        }
-    }
-
-    [RecipeManager.NCAPIRecipe]
-    public class sawmillloglogtemperateRecipe : BaseRecipe
-    {
-        public sawmillloglogtemperateRecipe() : base("sawmill.logtemperate.planks", "phentrixgames.sawmill", false)
-        {
-            Requirements.Add(new InventoryItem("logtemperate", 1));
-            Result.Add(new InventoryItem("planks", 6));
         }
     }
 }

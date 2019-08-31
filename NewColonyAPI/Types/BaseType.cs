@@ -678,7 +678,7 @@ namespace PhentrixGames.NewColonyAPI.Types
             }
         }
 
-        public JSONNode _CustomData
+        public JSONNode CustomData
         {
             get;
             private set;
@@ -700,7 +700,7 @@ namespace PhentrixGames.NewColonyAPI.Types
                 {
                     cnode.AddToArray(new JSONNode(str));
                 }
-                this._CustomData.SetAs("colors", cnode);
+                this.CustomData.SetAs("colors", cnode);
             }
         }
 
@@ -721,7 +721,7 @@ namespace PhentrixGames.NewColonyAPI.Types
                     JSONNode child = new JSONNode(NodeType.Object);
                     bhnode.AddToArray(child);
                 }
-                this._CustomData.SetAs("attachBehaviour", bhnode);
+                this.CustomData.SetAs("attachBehaviour", bhnode);
             }
         }
 
@@ -736,7 +736,7 @@ namespace PhentrixGames.NewColonyAPI.Types
             set
             {
                 _FarShadows = value;
-                this._CustomData.SetAs("farShadows", value);
+                this.CustomData.SetAs("farShadows", value);
             }
         }
 
@@ -751,7 +751,7 @@ namespace PhentrixGames.NewColonyAPI.Types
             set
             {
                 _WarnRemoval = value;
-                this._CustomData.SetAs("warnRemoval", value);
+                this.CustomData.SetAs("warnRemoval", value);
             }
         }
 
@@ -766,7 +766,7 @@ namespace PhentrixGames.NewColonyAPI.Types
             set
             {
                 _MinerIsMineable = value;
-                this._CustomData.SetAs("minerIsMineable", value);
+                this.CustomData.SetAs("minerIsMineable", value);
             }
         }
 
@@ -781,7 +781,7 @@ namespace PhentrixGames.NewColonyAPI.Types
             set
             {
                 _MinerMiningtime = value;
-                this._CustomData.SetAs("minerMiningtime", value);
+                this.CustomData.SetAs("minerMiningtime", value);
             }
         }
 
@@ -828,7 +828,7 @@ namespace PhentrixGames.NewColonyAPI.Types
                         if (i == 1)
                             torches.SetAs("b", letter);
                     }
-                    this._CustomData.SetAs("torches", torches);
+                    this.CustomData.SetAs("torches", torches);
                 }
             }
         }
@@ -844,7 +844,7 @@ namespace PhentrixGames.NewColonyAPI.Types
             set
             {
                 _UseNormalMap = value;
-                _CustomData.SetAs("useNormalMap", value);
+                CustomData.SetAs("useNormalMap", value);
             }
         }
 
@@ -859,7 +859,7 @@ namespace PhentrixGames.NewColonyAPI.Types
             set
             {
                 _UseHeightMap = value;
-                _CustomData.SetAs("useHeightMap", value);
+                CustomData.SetAs("useHeightMap", value);
             }
         }
 
@@ -874,7 +874,7 @@ namespace PhentrixGames.NewColonyAPI.Types
             set
             {
                 this._RenderOnlyIfSelected = value;
-                this._CustomData.SetAs("renderOnlyIfSelected", value);
+                this.CustomData.SetAs("renderOnlyIfSelected", value);
             }
         }
 
@@ -901,8 +901,8 @@ namespace PhentrixGames.NewColonyAPI.Types
         public BaseType(bool recipe = false)
         {
             // Register the callback to add recipes
-            //if (recipe)
-            //    this.AddRecipeCallback();
+            if (recipe)
+                this.AddRecipeCallback();
         }
 
         public BaseType(string name, bool recipe = false)
@@ -923,8 +923,8 @@ namespace PhentrixGames.NewColonyAPI.Types
             this.node.SetAs("isPlaceable", false);
 
             // Register the callback to add recipes
-            //if (recipe)
-            //    this.AddRecipeCallback();
+            if (recipe)
+                this.AddRecipeCallback();
         }
 
         public BaseType(string name, bool recipe = false, ushort blocksides = 0)
@@ -945,15 +945,15 @@ namespace PhentrixGames.NewColonyAPI.Types
             this.node.SetAs("isPlaceable", false);
 
             // Register the callback to add recipes
-            //if (recipe)
-            //    this.AddRecipeCallback();
+            if (recipe)
+                this.AddRecipeCallback();
         }
 
         public JSONNode Register()
         {
-            if (_CustomData.ChildCount != 0)
+            if (CustomData.ChildCount != 0)
             {
-                this.node.SetAs("customData", _CustomData);
+                this.node.SetAs("customData", CustomData);
             }
             return this.node;
         }
@@ -968,9 +968,9 @@ namespace PhentrixGames.NewColonyAPI.Types
         }
 
         // create a callback to the RecipeManager to have it attempt to generate recipes
-        internal void AddRecipeCallback()
+        private void AddRecipeCallback()
         {
-            Recipe.RecipeManager.TypesThatHaveRecipes.Add(this);
+            RecipeManager.AddTypeWithRecipe(this);
         }
 
         #endregion Recipe Stuff

@@ -1,6 +1,8 @@
 ﻿using PhentrixGames.NewColonyAPI.Types;
+using Pipliz.JSON;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 
@@ -58,6 +60,43 @@ namespace PhentrixGames.NewColonyAPI.Recipe
                     }
                 }
 
+                string recipes = Helpers.Utilities.MultiCombine(mod.ModFolder, "gamedata", "recipes");
+                if (Directory.Exists(recipes))
+                {
+                    string[] directories = Directory.GetDirectories(recipes, "*", SearchOption.TopDirectoryOnly);
+                    foreach (string dir in directories)
+                    {
+                        if (dir.EndsWith("player"))
+                        {
+                            //Get Files!
+                            string[] files = Directory.GetFiles(dir, "*.json", SearchOption.AllDirectories);
+                            foreach (string file in files)
+                            {
+                                Recipes.RecipeStorage.QueuePlayerRecipesFile(file, Recipes.RecipeStorage.EPlayerRecipePatchType.AddOrReplace, 15000);
+                            }
+                        }
+                        else if (dir.EndsWith("npc"))
+                        {
+                            string[] npcdirectories = Directory.GetDirectories(dir, "*", SearchOption.TopDirectoryOnly);
+                            foreach (string npcdir in npcdirectories)
+                            {
+                                string fixeddir = npcdir.Replace("\\", "/").Split('/').Last();
+                                Helpers.Logging.WriteLog(NewColonyAPIEntry.ModName, fixeddir, Helpers.Logging.LogType.Issue);
+                                if (NPCXP.NPCTypeManager.GetKeys().Contains(fixeddir))
+                                {
+                                    JSONNode npcType = new JSONNode(NodeType.Object);
+                                    npcType.SetAs("npcType", fixeddir);
+                                    string[] files = Directory.GetFiles(dir, "*.json", SearchOption.AllDirectories);
+                                    foreach (string file in files)
+                                    {
+                                        Recipes.RecipeStorage.QueueNPCRecipesFile(file, Recipes.RecipeStorage.ENPCRecipePatchType.AddOrReplace, 15000, npcType);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
                 if (Power.PowerManager.IsEnabled())
                 {
                     var powerlist = assembly.GetTypes()
@@ -73,25 +112,65 @@ namespace PhentrixGames.NewColonyAPI.Recipe
                         catch (MissingFieldException mfe)
                         {
                             Helpers.Logging.WriteLog(modname,
-                                t.Name + " cannot be instantiated.  This probably isn't an error. " + mfe.Message + " |||| " + mfe.StackTrace,
+                                tpower.Name + " cannot be instantiated.  This probably isn't an error. " + mfe.Message + " |||| " + mfe.StackTrace,
                                 Helpers.Logging.LogType.Issue);
                         }
                         catch (InvalidCastException ice)
                         {
-                            Helpers.Logging.WriteLog(modname, t.Name + " doesn't properly implement our Type system. This probably isn't an error. " + ice.Message + " |||| " + ice.StackTrace,
+                            Helpers.Logging.WriteLog(modname, tpower.Name + " doesn't properly implement our Type system. This probably isn't an error. " + ice.Message + " |||| " + ice.StackTrace,
                                 Helpers.Logging.LogType.Issue);
                         }
                         catch (Exception e)
                         {
-                            Helpers.Logging.WriteLog(modname, t.Name + " Recipe Error: " + e.Message + "\n" + e.StackTrace + "\n\n" + e.InnerException.Message + "\n" + e.InnerException.StackTrace,
+                            Helpers.Logging.WriteLog(modname, tpower.Name + " Recipe Error: " + e.Message + "\n" + e.StackTrace + "\n\n" + e.InnerException.Message + "\n" + e.InnerException.StackTrace,
                                 Helpers.Logging.LogType.Issue,
                                 true);
+                        }
+                    }
+
+                    string powerrecipes = Helpers.Utilities.MultiCombine(mod.ModFolder, "gamedata", "powerrecipes");
+                    if (Directory.Exists(powerrecipes))
+                    {
+                        string[] directories = Directory.GetDirectories(powerrecipes, "*", SearchOption.AllDirectories);
+                        foreach (string dir in directories)
+                        {
+                            if (dir.EndsWith("player"))
+                            {
+                                //Get Files!
+                                string[] files = Directory.GetFiles(dir, "*.json", SearchOption.AllDirectories);
+                                foreach (string file in files)
+                                {
+                                    Recipes.RecipeStorage.QueuePlayerRecipesFile(file, Recipes.RecipeStorage.EPlayerRecipePatchType.AddOrReplace, 15000);
+                                }
+                            }
+                            else if (dir.EndsWith("npc"))
+                            {
+                                string[] npcdirectories = Directory.GetDirectories(dir, "*", SearchOption.TopDirectoryOnly);
+                                foreach (string npcdir in npcdirectories)
+                                {
+                                    string fixeddir = npcdir.Replace("\\", "/").Split('/').Last();
+                                    if (NPCXP.NPCTypeManager.GetKeys().Contains(fixeddir))
+                                    {
+                                        JSONNode npcType = new JSONNode(NodeType.Object);
+                                        npcType.SetAs("npcType", fixeddir);
+                                        string[] files = Directory.GetFiles(dir, "*.json", SearchOption.AllDirectories);
+                                        foreach (string file in files)
+                                        {
+                                            Recipes.RecipeStorage.QueueNPCRecipesFile(file, Recipes.RecipeStorage.ENPCRecipePatchType.AddOrReplace, 15000, npcType);
+                                        }
+                                    }
+                                }
+                            }
                         }
                     }
                 }
             }
             foreach (var type in TypesThatHaveRecipes)
             {
+                foreach (var recipe in type.AddRecipes())
+                {
+                    recipe.RegisterRecipe();
+                }
             }
             Helpers.Logging.WriteLog(NewColonyAPIEntry.ModName, "Recipes Autoloaded: " + count, Helpers.Logging.LogType.Loading);
         }

@@ -1,6 +1,7 @@
 ﻿using Pipliz.JSON;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 
@@ -55,6 +56,27 @@ namespace PhentrixGames.NewColonyAPI.Types
                     catch (Exception e)
                     {
                         Helpers.Logging.WriteLog(mod.ModName, type.Name + " Type Error: " + e.Message + "\n" + e.StackTrace + "\n\n" + e.InnerException.Message + "\n" + e.InnerException.StackTrace, Helpers.Logging.LogType.Issue, true);
+                    }
+                }
+
+                string[] directories = Directory.GetDirectories(mod.ModFolder, "*", SearchOption.AllDirectories);
+                foreach (string dir in directories)
+                {
+                    if (dir.EndsWith("typesadd"))
+                    {
+                        string[] files = Directory.GetFiles(dir, "*.json", SearchOption.AllDirectories);
+                        foreach (string file in files)
+                        {
+                            ItemTypesServer.QueueItemTypePatches(file, ItemTypesServer.EItemTypePatchType.AddNewTypes, 1);
+                        }
+                    }
+                    if (dir.EndsWith("typesreplace"))
+                    {
+                        string[] files = Directory.GetFiles(dir, "*.json", SearchOption.AllDirectories);
+                        foreach (string file in files)
+                        {
+                            ItemTypesServer.QueueItemTypePatches(file, ItemTypesServer.EItemTypePatchType.OverrideTypeProperties, 1);
+                        }
                     }
                 }
 
