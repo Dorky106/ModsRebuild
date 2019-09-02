@@ -81,7 +81,6 @@ namespace PhentrixGames.NewColonyAPI.Recipe
                             foreach (string npcdir in npcdirectories)
                             {
                                 string fixeddir = npcdir.Replace("\\", "/").Split('/').Last();
-                                Helpers.Logging.WriteLog(NewColonyAPIEntry.ModName, fixeddir, Helpers.Logging.LogType.Issue);
                                 if (NPCXP.NPCTypeManager.GetKeys().Contains(fixeddir))
                                 {
                                     JSONNode npcType = new JSONNode(NodeType.Object);

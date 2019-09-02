@@ -740,7 +740,7 @@ namespace PhentrixGames.NewColonyAPI.Power
             }
         }
 
-        internal static bool IsEnabled()
+        public static bool IsEnabled()
         {
             return Enabled;
         }

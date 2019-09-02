@@ -1,5 +1,4 @@
 using BlockEntities;
-using PhentrixGames.NewColonyAPI.Content.Powerlines;
 using PhentrixGames.NewColonyAPI.Helpers;
 using PhentrixGames.NewColonyAPI.Meshes;
 using PhentrixGames.NewColonyAPI.Power;

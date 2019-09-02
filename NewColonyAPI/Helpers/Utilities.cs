@@ -67,5 +67,10 @@ namespace PhentrixGames.NewColonyAPI.Helpers
             Pipliz.Vector3Int ret = new Pipliz.Vector3Int(x, y, z);
             return ret;
         }
+
+        public static string GetWorldJSONPath(string filename)
+        {
+            return MultiCombine("gamedata", "savegames", ServerManager.WorldName, filename);
+        }
     }
 }

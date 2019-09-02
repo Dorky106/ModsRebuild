@@ -68,32 +68,6 @@ namespace PhentrixGames.NewColonyAPI
             Mods.ModManager.CheckDeps();
         }
 
-        [ModLoader.ModCallback(ModLoader.EModCallbackType.AfterItemTypesDefined, NewColonyAPIEntry.Naming + "RegisterJobs")]
-        [ModLoader.ModCallbackDependsOn("create_servermanager_trackers")]
-        [ModLoader.ModCallbackDependsOn("pipliz.server.loadnpctypes")]
-        [ModLoader.ModCallbackProvidesFor("create_savemanager")]
-        public static void RegisterJobs()
-        {
-            if (PowerManager.IsEnabled())
-            {
-                Power.PowerJobs.GeneratorJobSettings settings = new Power.PowerJobs.GeneratorJobSettings("BasicBlock", "phentrixgames.generator", new InventoryItem("planks"));
-                ServerManager.BlockEntityCallbacks.RegisterEntityManager(new Jobs.BlockJobManager<Power.PowerJobs.GeneratorJobInstance>(settings));
-
-                Power.PowerJobs.MachineJobSettings msettings = new Power.PowerJobs.MachineJobSettings("Sawmill", "phentrixgames.sawmill");
-                ServerManager.BlockEntityCallbacks.RegisterEntityManager(new Jobs.BlockJobManager<Power.PowerJobs.MachineJobInstance>(msettings));
-            }
-        }
-
-        [ModLoader.ModCallback(ModLoader.EModCallbackType.AfterItemTypesDefined, NewColonyAPIEntry.Naming + "RecipeMapping")]
-        [ModLoader.ModCallbackProvidesFor("pipliz.server.recipenpcload")]
-        public static void RecipeMapping()
-        {
-            if (PowerManager.IsEnabled())
-            {
-                ServerManager.RecipeStorage.AddBlockToRecipeMapping("Sawmill", "phentrixgames.sawmill");
-            }
-        }
-
         [ModLoader.ModCallback(ModLoader.EModCallbackType.OnPlayerClicked, NewColonyAPIEntry.Naming + "OnPlayerClickTester")]
         public static void OnPlayerClicked(Players.Player player, PlayerClickedData clickedData)
         {

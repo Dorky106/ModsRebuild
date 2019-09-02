@@ -1,10 +1,11 @@
 ﻿using PhentrixGames.NewColonyAPI.Power;
+using PhentrixGames.NewColonyAPI.Types;
 using static PhentrixGames.NewColonyAPI.Power.PowerManager;
 
-namespace PhentrixGames.NewColonyAPI.Content
+namespace PhentrixGames.RiseoftheNewColonies.PowerSystem.Batteries
 {
     [NCAPIPowerType]
-    public class BasicBatteryBlock : Types.BaseType
+    public class BasicBatteryBlock : BaseType
     {
         public BasicBatteryBlock() : base("Basic Battery", false)
         {
@@ -13,7 +14,7 @@ namespace PhentrixGames.NewColonyAPI.Content
         }
     }
 
-    public class BasicBattery : Power.Battery
+    public class BasicBattery : Battery
     {
         public BasicBattery() : base("Basic Battery", 1000)
         {

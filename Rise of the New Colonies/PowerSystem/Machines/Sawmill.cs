@@ -1,22 +1,24 @@
-﻿using System.Collections.Generic;
+﻿using PhentrixGames.NewColonyAPI.Helpers;
 using PhentrixGames.NewColonyAPI.Meshes;
 using PhentrixGames.NewColonyAPI.Power;
 using PhentrixGames.NewColonyAPI.Recipe;
+using PhentrixGames.NewColonyAPI.Types;
+using System.Collections.Generic;
 using static PhentrixGames.NewColonyAPI.Power.PowerManager;
 
-namespace PhentrixGames.NewColonyAPI.Content
+namespace PhentrixGames.RiseoftheNewColonies.PowerSystem.Machines
 {
     [NCAPIPowerType]
-    public class SawmillBlock : Types.BaseType
+    public class SawmillBlock : BaseType
     {
         public SawmillBlock() : base("Sawmill", true)
         {
-            if (MeshManager.GetMesh(NewColonyAPIEntry.ModName, "sawmill", out string mesh))
+            if (MeshManager.GetMesh(Entry.ModName, "sawmill", out string mesh))
             {
                 this.Mesh = mesh;
             }
             //this.Colliders = Helpers.Colliders.GetColliders("twohigh");
-            this.Icon = Helpers.Utilities.MultiCombine(NewColonyAPIEntry.ModIconDirectory, "sawmill.png");
+            this.Icon = Utilities.MultiCombine(Entry.ModIconDirectory, "sawmill.png");
             this.IsPlaceable = true;
             PowerManager.ValidateBlockID(this.TypeName, new Sawmill());
         }

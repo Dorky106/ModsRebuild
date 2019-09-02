@@ -55,12 +55,20 @@
     <Reference Include="UnityEngine.CoreModule">
       <HintPath>F:\SteamLibrary\steamapps\common\Colony Survival\colonyserver_Data\Managed\UnityEngine.CoreModule.dll</HintPath>
     </Reference>
+    <Reference Include="UnityEngine.TextRenderingModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null" />
     <Reference Include="UnityEngine.UI">
       <HintPath>F:\SteamLibrary\steamapps\common\Colony Survival\colonyserver_Data\Managed\UnityEngine.UI.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AntiGrief\AntiGriefManager.cs" />
+    <Compile Include="ColonyWandUI\ColonyJobData.cs" />
+    <Compile Include="ColonyWandUI\ColonyManager.cs" />
+    <Compile Include="ColonyWandUI\Itemcount.cs" />
+    <Compile Include="ColonyWandUI\NetworkStuff.cs" />
+    <Compile Include="ColonyWandUI\NPCJobs.cs" />
+    <Compile Include="ColonyWandUI\Stockpile\OldStockpiles.cs" />
+    <Compile Include="ColonyWandUI\Stockpile\StockpileManager.cs" />
     <Compile Include="Commands\BaseChatCommand.cs" />
     <Compile Include="Commands\ChatCommandManager.cs" />
     <Compile Include="Commands\ChatCommands\AdminChat.cs" />
@@ -75,10 +83,8 @@
     <Compile Include="Commands\ChatCommands\ServerPopulation.cs" />
     <Compile Include="Commands\ChatCommands\Whisper.cs" />
     <Compile Include="Configuration\ConfigManager.cs" />
-    <Compile Include="Content\BasicBlock.cs" />
-    <Compile Include="Content\BasicRecipe.cs" />
-    <Compile Include="Content\BatteryTest.cs" />
     <Compile Include="Content\BlockSides.cs" />
+    <Compile Include="Content\ColonyWand.cs" />
     <Compile Include="Content\Electricity.cs" />
     <Compile Include="Content\Powerlines\PowerLine.cs" />
     <Compile Include="Content\Powerlines\PowerLineBase.cs" />
@@ -146,7 +152,6 @@
     <Compile Include="Content\Powerlines\PowerLineBaseZYMinus.cs" />
     <Compile Include="Content\Powerlines\PowerLineBaseZYPlus.cs" />
     <Compile Include="Content\PowerReader.cs" />
-    <Compile Include="Content\Sawmill.cs" />
     <Compile Include="Entry.cs" />
     <Compile Include="Fluids\EFluids.cs" />
     <Compile Include="Fluids\FluidInfo.cs" />

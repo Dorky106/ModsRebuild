@@ -9,11 +9,11 @@ namespace PhentrixGames.NewColonyAPI.Content
     {
         public PowerReaderRecipe() : base("PowerReaderRecipe", null, true)
         {
-            this.Requirements = new System.Collections.Generic.List<InventoryItem>
+            this.Requirements = new List<InventoryItem>
             {
                 new InventoryItem("planks", 10)
             };
-            this.Result = new System.Collections.Generic.List<InventoryItem>
+            this.Result = new List<InventoryItem>
             {
                 new InventoryItem("Power Reader")
             };
