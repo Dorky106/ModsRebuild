@@ -1,5 +1,4 @@
-﻿using PhentrixGames.NewColonyAPI.Power;
-using Shared;
+﻿using Shared;
 using System;
 
 namespace PhentrixGames.NewColonyAPI

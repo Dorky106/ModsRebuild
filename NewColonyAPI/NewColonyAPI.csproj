@@ -200,7 +200,10 @@
     <Compile Include="Textures\BaseTexture.cs" />
     <Compile Include="Textures\TextureManager.cs" />
     <Compile Include="Types\BaseType.cs" />
-    <Compile Include="Types\TypesCustomData.cs" />
+    <Compile Include="Types\ColliderData.cs" />
+    <Compile Include="Types\Colliders.cs" />
+    <Compile Include="Types\DecorativeType.cs" />
+    <Compile Include="Types\Torches.cs" />
     <Compile Include="Types\TypesManager.cs" />
   </ItemGroup>
   <ItemGroup />

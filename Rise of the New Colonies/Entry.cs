@@ -62,7 +62,7 @@ namespace PhentrixGames.RiseoftheNewColonies
                 GeneratorJobLitSettings gsettings = new GeneratorJobLitSettings("Generator", "phentrixgames.generator", new InventoryItem("planks"));
                 ServerManager.BlockEntityCallbacks.RegisterEntityManager(new Jobs.BlockJobManager<GeneratorJobInstance>(gsettings));
 
-                GeneratorJobWaterSettings g2settings = new GeneratorJobWaterSettings("Hydro Generator", "phentrixgames.hydrogenerator", new InventoryItem("bucketwater", 0), 7);
+                GeneratorJobWaterSettings g2settings = new GeneratorJobWaterSettings("Hydro Generator", "phentrixgames.hydrogenerator", new InventoryItem("bucketwater", 0), 4);
                 ServerManager.BlockEntityCallbacks.RegisterEntityManager(new Jobs.BlockJobManager<GeneratorJobWaterInstance>(g2settings));
 
                 MachineJobSettings msettings = new MachineJobSettings("Sawmill", "phentrixgames.sawmill");

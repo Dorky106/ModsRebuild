@@ -30,6 +30,7 @@ namespace PhentrixGames.RiseoftheNewColonies.PowerSystem.Generators
         public GeneratorBlock() : base("Generator", false)
         {
             this.IsPlaceable = true;
+            this.Icon = NewColonyAPI.Helpers.Utilities.MultiCombine(Entry.ModIconDirectory, "generator.png");
             if (MeshManager.GetMesh(Entry.ModName, "generator", out string mesh))
             {
                 this.Mesh = mesh;
@@ -197,7 +198,7 @@ namespace PhentrixGames.RiseoftheNewColonies.PowerSystem.Generators
 
     public class BasicGenerator : Generator
     {
-        public BasicGenerator() : base("Generator", 1000, 20)
+        public BasicGenerator() : base("Generator", 1000, 30)
         { }
     }
 }

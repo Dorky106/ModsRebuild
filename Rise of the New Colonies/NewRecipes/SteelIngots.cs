@@ -6,7 +6,7 @@ namespace PhentrixGames.RiseoftheNewColonies.NewRecipes
     [NCAPIPowerRecipe]
     public class SteelIngots : BaseRecipe
     {
-        public SteelIngots() : base("electricforge.steelingot", "phentrixgames.electricforge", true, 10, 1)
+        public SteelIngots() : base("electricforge.steelingot", "phentrixgames.electricforge", false, 10, 1)
         {
             Requirements.Add(new InventoryItem("ironwrought", 3));
             Requirements.Add(new InventoryItem("cokes", 1));

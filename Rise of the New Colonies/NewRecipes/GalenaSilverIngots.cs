@@ -6,7 +6,7 @@ namespace PhentrixGames.RiseoftheNewColonies.NewRecipes
     [NCAPIPowerRecipe]
     public class GalenaSilverIngots : BaseRecipe
     {
-        public GalenaSilverIngots() : base("electricforge.galenasilver", "phentrixgames.electricforge", true, 10, 1)
+        public GalenaSilverIngots() : base("electricforge.galenasilver", "phentrixgames.electricforge", false, 10, 1)
         {
             Requirements.Add(new InventoryItem("galenasilver", 2));
             Requirements.Add(new InventoryItem("charcoal", 1));

@@ -6,7 +6,7 @@ namespace PhentrixGames.RiseoftheNewColonies.NewRecipes
     [NCAPIPowerRecipe]
     public class GoldIngots : BaseRecipe
     {
-        public GoldIngots() : base("electricforge.goldingot", "phentrixgames.electricforge", true, 10, 1)
+        public GoldIngots() : base("electricforge.goldingot", "phentrixgames.electricforge", false, 10, 1)
         {
             Requirements.Add(new InventoryItem("goldore", 10));
             Requirements.Add(new InventoryItem("cokes", 1));
