@@ -19,7 +19,7 @@ namespace PhentrixGames.ShapedBlocks.Wool
     [NCAPIType]
     public class BlueWool : BaseType
     {
-        public BlueWool() : base("BlueWool", true)
+        public BlueWool() : base("BlueWool", false)
         {
             this.SideAll = "BlueWoolText";
             this.IsPlaceable = true;

@@ -19,7 +19,7 @@ namespace PhentrixGames.ShapedBlocks.Wool
     [NCAPIType]
     public class MegentaWool : BaseType
     {
-        public MegentaWool() : base("MegentaWool", true)
+        public MegentaWool() : base("MegentaWool", false)
         {
             this.SideAll = "MegentaWoolText";
             this.IsPlaceable = true;

@@ -19,7 +19,7 @@ namespace PhentrixGames.ShapedBlocks.Wool
     [NCAPIType]
     public class LimeWool : BaseType
     {
-        public LimeWool() : base("LimeWool", true)
+        public LimeWool() : base("LimeWool", false)
         {
             this.SideAll = "LimeWoolText";
             this.IsPlaceable = true;
