@@ -963,8 +963,7 @@ namespace PhentrixGames.NewColonyAPI.Types
         // base Add Recipes function
         public virtual List<BaseRecipe> AddRecipes()
         {
-            Helpers.Logging.WriteLog(NewColonyAPIEntry.ModName, "Trying to add Recipe for: " + this.TypeName, Helpers.Logging.LogType.Issue);
-            throw new System.NotImplementedException();
+            throw new System.NotImplementedException("Failed trying to add Recipe for: " + this.TypeName);
         }
 
         // create a callback to the RecipeManager to have it attempt to generate recipes

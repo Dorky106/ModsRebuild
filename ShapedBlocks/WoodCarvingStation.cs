@@ -19,7 +19,7 @@ namespace PhentrixGames.ShapedBlocks
     [NCAPIType]
     public class WoodCarvingStation : BaseType
     {
-        public WoodCarvingStation() : base("Wood Carving Station", true)
+        public WoodCarvingStation() : base("Wood Carving Station", false)
         {
             this.SideAll = "planks";
             this.SideYPlus = "woodcarver";

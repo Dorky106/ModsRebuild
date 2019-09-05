@@ -95,17 +95,17 @@ namespace PhentrixGames.NewColonyAPI.Helpers
             switch (logVersion)
             {
                 case LogVersionType.Newer:
-                    message = "You are running a newer version than the public release (latest public release: " + latest.ToString() + ")";
+                    message = modname + " : Is newer version than the public release (latest public release: " + latest.ToString() + ")";
                     t = new Pipliz.LogMessage(GetTimestamp() + "[" + NewColonyAPIEntry.ModName + "](Version Check): " + Chat.BuildMessage(message, Chat.ChatColour.lightblue), UnityEngine.LogType.Log);
                     break;
 
                 case LogVersionType.Release:
-                    message = ": Is up to date!";
+                    message = modname + " : Is up to date!";
                     t = new Pipliz.LogMessage(GetTimestamp() + "[" + NewColonyAPIEntry.ModName + "](Version Check): " + Chat.BuildMessage(message, Chat.ChatColour.green), UnityEngine.LogType.Log);
                     break;
 
                 case LogVersionType.Outofdate:
-                    message = ": Is out of date.  Latest Version: " + latest.ToString();
+                    message = modname + " : Is out of date.  Latest Version: " + latest.ToString();
                     t = new Pipliz.LogMessage(GetTimestamp() + "[" + NewColonyAPIEntry.ModName + "](Version Check): " + Chat.BuildMessage(message, Chat.ChatColour.red), UnityEngine.LogType.Log);
                     break;
             }

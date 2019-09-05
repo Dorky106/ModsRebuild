@@ -166,11 +166,19 @@ namespace PhentrixGames.NewColonyAPI.Recipe
             }
             foreach (var type in TypesThatHaveRecipes)
             {
-                foreach (var recipe in type.AddRecipes())
+                try
                 {
-                    recipe.RegisterRecipe();
+                    foreach (var recipe in type.AddRecipes())
+                    {
+                        recipe.RegisterRecipe();
+                    }
+                }
+                catch (Exception e)
+                {
+                    Helpers.Logging.WriteLog(NewColonyAPIEntry.ModName, e.Message, Helpers.Logging.LogType.Issue);
                 }
             }
+            TypesThatHaveRecipes.Clear();
             Helpers.Logging.WriteLog(NewColonyAPIEntry.ModName, "Recipes Autoloaded: " + count, Helpers.Logging.LogType.Loading);
         }
     }
