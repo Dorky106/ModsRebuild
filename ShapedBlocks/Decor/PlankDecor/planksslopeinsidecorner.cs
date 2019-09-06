@@ -9,7 +9,7 @@ namespace PhentrixGames.ShapedBlocks.Decor
     [NCAPIRecipe]
     public class PlanksslopeinsidecornerRecipe : BaseRecipe
     {
-        public PlanksslopeinsidecornerRecipe() : base("planksslopeinsidecornerrecipe", "phentrixgames.woodcarver", true, 10, 1)
+        public PlanksslopeinsidecornerRecipe() : base("planksslopeinsidecornerrecipe", "phentrixgames.woodcarver", false, 10, 1)
         {
             Requirements.Add(new InventoryItem("planks", 1));
             Result.Add(new InventoryItem("planksslopeinsidecorner", 1));

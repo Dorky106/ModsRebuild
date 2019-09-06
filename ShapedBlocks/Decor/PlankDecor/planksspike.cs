@@ -10,7 +10,7 @@ namespace PhentrixGames.ShapedBlocks.Decor
     [NCAPIRecipe]
     public class PlanksspikeRecipe : BaseRecipe
     {
-        public PlanksspikeRecipe() : base("planksspikerecipe", "phentrixgames.woodcarver", true, 10, 1)
+        public PlanksspikeRecipe() : base("planksspikerecipe", "phentrixgames.woodcarver", false, 10, 1)
         {
             Requirements.Add(new InventoryItem("planks", 1));
             Result.Add(new InventoryItem("planksspike", 1));
@@ -20,7 +20,7 @@ namespace PhentrixGames.ShapedBlocks.Decor
     [NCAPIType]
     public class Planksspike : BaseType
     {
-        public Planksspike() : base("planksspike", true)
+        public Planksspike() : base("planksspike", false)
         {
             this.SideAll = "planks";
             this.IsPlaceable = true;

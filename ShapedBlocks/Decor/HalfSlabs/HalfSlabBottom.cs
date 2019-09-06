@@ -9,7 +9,7 @@ namespace PhentrixGames.ShapedBlocks.Decor.HalfSlabs
     [NCAPIRecipe]
     public class HalfSlabBottomRecipe : BaseRecipe
     {
-        public HalfSlabBottomRecipe() : base("Test.HalfSlabBottom", "phentrixgames.woodcarver", true, 10, 1)
+        public HalfSlabBottomRecipe() : base("Test.HalfSlabBottom", "phentrixgames.woodcarver", false, 10, 1)
         {
             Requirements.Add(new InventoryItem("planks", 1));
             Result.Add(new InventoryItem("HalfSlabBottom", 1));
@@ -19,7 +19,7 @@ namespace PhentrixGames.ShapedBlocks.Decor.HalfSlabs
     [NCAPIType]
     public class HalfSlabBottom : BaseType
     {
-        public HalfSlabBottom() : base("HalfSlabBottom", true)
+        public HalfSlabBottom() : base("HalfSlabBottom", false)
         {
             this.SideAll = "planks";
             this.IsPlaceable = true;

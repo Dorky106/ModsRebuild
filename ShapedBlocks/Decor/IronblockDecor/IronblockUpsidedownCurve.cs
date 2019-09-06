@@ -9,7 +9,7 @@ namespace PhentrixGames.ShapedBlocks.Decor
     [NCAPIRecipe]
     public class IronblockupsidedowncurveRecipe : BaseRecipe
     {
-        public IronblockupsidedowncurveRecipe() : base("ironblockupsidedowncurverecipe", "phentrixgames.woodcarver", true, 10, 1)
+        public IronblockupsidedowncurveRecipe() : base("ironblockupsidedowncurverecipe", "phentrixgames.woodcarver", false, 10, 1)
         {
             Requirements.Add(new InventoryItem("ironblock", 1));
             Result.Add(new InventoryItem("ironblockupsidedowncurve", 1));

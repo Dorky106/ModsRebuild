@@ -8,7 +8,7 @@ namespace PhentrixGames.ShapedBlocks.Decor.HalfSlabs
     [NCAPIRecipe]
     public class VerticalHalfSlabRecipe : BaseRecipe
     {
-        public VerticalHalfSlabRecipe() : base("plankshalfslaberecipe", "phentrixgames.woodcarver", true, 10, 1)
+        public VerticalHalfSlabRecipe() : base("plankshalfslaberecipe", "phentrixgames.woodcarver", false, 10, 1)
         {
             Requirements.Add(new InventoryItem("planks", 1));
             Result.Add(new InventoryItem("plankshalfslab", 1));

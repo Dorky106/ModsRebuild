@@ -1,12 +1,23 @@
 ﻿using System.Collections.Generic;
+using System.IO;
 using PhentrixGames.NewColonyAPI.Helpers;
 using PhentrixGames.NewColonyAPI.Recipe;
+using PhentrixGames.NewColonyAPI.Textures;
 using PhentrixGames.NewColonyAPI.Types;
-using static PhentrixGames.NewColonyAPI.Recipe.RecipeManager;
+using static PhentrixGames.NewColonyAPI.Textures.TextureManager;
 using static PhentrixGames.NewColonyAPI.Types.TypesManager;
 
 namespace PhentrixGames.ShapedBlocks.Wool
 {
+    [NCAPITexture]
+    public class YellowWoolText : BaseTexture
+    {
+        public YellowWoolText() : base("YellowWoolText",
+            Path.Combine(Entry.ModMaterialsDirectory, Path.Combine("Wool", "wool_colored_yellow.png")).Replace("\\", "/")
+        )
+        { }
+    }
+
     [NCAPIType]
     public class YellowWool : BaseType
     {

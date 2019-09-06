@@ -1,15 +1,27 @@
 ﻿using PhentrixGames.NewColonyAPI.Helpers;
 using PhentrixGames.NewColonyAPI.Recipe;
+using PhentrixGames.NewColonyAPI.Textures;
 using PhentrixGames.NewColonyAPI.Types;
+using System.IO;
 using static PhentrixGames.NewColonyAPI.Recipe.RecipeManager;
+using static PhentrixGames.NewColonyAPI.Textures.TextureManager;
 using static PhentrixGames.NewColonyAPI.Types.TypesManager;
 
 namespace PhentrixGames.ShapedBlocks.Wool
 {
+    [NCAPITexture]
+    public class RedWoolText : BaseTexture
+    {
+        public RedWoolText() : base("RedWoolText",
+            Path.Combine(Entry.ModMaterialsDirectory, Path.Combine("Wool", "wool_colored_red.png")).Replace("\\", "/")
+        )
+        { }
+    }
+
     [NCAPIRecipe]
     public class RedWoolRecipe : BaseRecipe
     {
-        public RedWoolRecipe() : base("Test.Redwool", "pipliz.crafter", true, 10, 1)
+        public RedWoolRecipe() : base("Test.Redwool", "pipliz.crafter", false, 10, 1)
         {
             Requirements.Add(new InventoryItem("flax", 1));
             Result.Add(new InventoryItem("RedWool", 1));

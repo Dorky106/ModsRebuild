@@ -1,11 +1,23 @@
 ﻿using PhentrixGames.NewColonyAPI.Helpers;
 using PhentrixGames.NewColonyAPI.Recipe;
+using PhentrixGames.NewColonyAPI.Textures;
 using PhentrixGames.NewColonyAPI.Types;
+using System.IO;
 using static PhentrixGames.NewColonyAPI.Recipe.RecipeManager;
+using static PhentrixGames.NewColonyAPI.Textures.TextureManager;
 using static PhentrixGames.NewColonyAPI.Types.TypesManager;
 
 namespace PhentrixGames.ShapedBlocks.Wool
 {
+    [NCAPITexture]
+    public class OrangeWoolText : BaseTexture
+    {
+        public OrangeWoolText() : base("OrangeWoolText",
+            Path.Combine(Entry.ModMaterialsDirectory, Path.Combine("Wool", "wool_colored_orange.png")).Replace("\\", "/")
+        )
+        { }
+    }
+
     [NCAPIRecipe]
     public class OrangeWoolRecipe : BaseRecipe
     {
